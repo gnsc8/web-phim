@@ -12,10 +12,21 @@ class DaoDienModel extends MyModel
     public $ten_dao_dien;
     public $gioi_thieu;
     public $tb_name="tb_dao_dien";
-    public function getList($params = null){
+    public function getList($params = null,$start,$limit){
 
-        $sql = "SELECT * FROM $this->tb_name ORDER  BY id DESC ";
+        $sql = "SELECT * FROM $this->tb_name ";
 
+        // lệnh sql chưa có where
+        $strWhere = '';
+        if(isset($params['search_hoten']) && strlen($params['search_hoten'])>0){
+            if($strWhere =='')
+                $strWhere .= " WHERE $this->tb_name.ten_dao_dien LIKE '%{$params['search_hoten']}%' ";
+            else
+                $strWhere .= " AND  $this->tb_name.ten_dao_dien LIKE '%{$params['search_hoten']}%' ";
+        }
+        $strLimit = " LIMIT $start, $limit";
+        $sql .= $strWhere;
+        $sql .= $strLimit;
         $res = $this->ExecQuery($sql); // hàm exec này được kế thừa từ lớp cha MyModel.
 
         $data = array();
@@ -82,5 +93,26 @@ class DaoDienModel extends MyModel
         else
             return "Không cập nhật  được";
 
+    }
+    public function count($params = null){
+        $sql = "SELECT COUNT(id) as tong FROM tb_dao_dien";
+
+        $strWhere = '';
+        if (isset($params['search_hoten']) && strlen($params['search_hoten']) > 0) {
+            if ($strWhere == '')
+                $strWhere .= " WHERE ten_dao_dien LIKE '%{$params['search_hoten']}%' ";
+            else
+                $strWhere .= " AND  ten_dao_dien LIKE '%{$params['search_hoten']}%' ";
+        }
+
+        $sql .= $strWhere;
+        $res = $this->ExecQuery($sql); // hàm exec này được kế thừa từ lớp cha MyModel.
+
+        $row = mysqli_fetch_assoc($res);
+
+        $data = $row['tong'];
+        mysqli_free_result($res);
+
+        return $data;
     }
 }

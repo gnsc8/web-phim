@@ -156,7 +156,7 @@
                  alt='AdminLTE Logo'
                  class='brand-image img-circle elevation-3'
                  style='opacity: .8'>
-            <span class='brand-text font-weight-light'>AdminLTE 3</span>
+            <span class='brand-text font-weight-light'>HG Film</span>
         </a>
 
         <!-- Sidebar -->
@@ -167,7 +167,12 @@
                     <img src='<?php echo base_url;?>/publics/template-admin/dist/img/user2-160x160.jpg' class='img-circle elevation-2' alt='User Image'>
                 </div>
                 <div class='info'>
-                    <a href='#' class='d-block'>Alexander Pierce</a>
+                    <a href='#' class='d-block'><?php if(isset($_SESSION['auth'])){
+                            // đã đăng nhập\
+                            $userInfo = $_SESSION['auth'];
+
+                            echo "$userInfo->username";
+                        }?></a>
                 </div>
             </div>
 
@@ -314,13 +319,13 @@
     </div>
     <!-- /.content-wrapper -->
 
-    <footer class='main-footer'>
+    <!--<footer class='main-footer'>
         <div class='float-right d-none d-sm-block'>
             <b>Version</b> 3.0.0-alpha
         </div>
         <strong>Copyright &copy; 2014-2018 <a href='http://adminlte.io'>AdminLTE.io</a>.</strong> All rights
         reserved.
-    </footer>
+    </footer>-->
 
     <!-- Control Sidebar -->
     <aside class='control-sidebar control-sidebar-dark'>

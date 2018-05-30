@@ -1,4 +1,4 @@
-
+<link rel="stylesheet" href="<?php echo public_path;?>/css/phan_trang.css">
 <section class="content-header">
       <div class="container-fluid">
         <div class="row mb-2">
@@ -24,11 +24,12 @@
                 <a href="?controller=admin-dien-vien">Clear</a>
              </form>
             <div class="card-body">
+                <form action="" method="post">
               <table id="example2" class="table table-bordered table-hover">
                 <thead>
                      <tr>
                             <th>ID</th>
-                            <th>Tên Danh Mục</th>
+                            <th>Tên Diễn Viên</th>
                             <th>Giới Thiệu</th>
                      
                         </tr>
@@ -36,7 +37,7 @@
                 </thead>
                 <tbody>
                    <?php
-                        foreach($this->view->list as $row){
+                        foreach($this->view->dien_vien as $row){
 
                             $link_edit = "<a href='?controller=admin-dien-vien&action=edit&id={$row['id']}'>{$row['ten_dien_vien']}</a>";
                             echo " <tr>
@@ -50,6 +51,45 @@
                 </tbody>
                 
               </table>
+                    <div class="pagination">
+                        <?php
+                        //hiển thị phần phân trang
+                        $base_url = base_url;
+                        $ten_dien_vien="";
+                        if (isset($_GET['search_hoten']) && strlen($_GET['search_hoten']) > 0) {
+                            $ten_dien_vien = "&search_hoten=".$_GET['search_hoten'];
+                        }
+                        $url_admin = "?controller=admin-dien-vien$ten_dien_vien";
+                        $data = '';
+                        if ($this->view->current_page > 1 && $this->view->total_page > 1){
+                            $data .= '<a class="phan_trang" href="'.$base_url.''.$url_admin.'&page='.($this->view->current_page-1).'">Prev</a>';
+                        }
+
+                        // Lặp khoảng giữa
+
+                        $data .=($this->view->current_page - 3) > 1 ? '<li class="phan_trang">...</li>' :'';
+                        for($i = ($this->view->current_page - 3) > 0 ? ($this->view->current_page - 3) : 1; $i <= (($this->view->current_page + 3) > $this->view->total_page ? $this->view->total_page :($this->view->current_page + 3)); $i++){
+                            if($i == $this->view->current_page){
+                                $data .= '<span class="phan_trang" style="background-color: white;color: black;border: 1px solid;">'.$i.'</span>';
+                            } else{
+                                $data .= '<a class="phan_trang" href="'.$url_admin.'&page='.$i.'">'.$i.'</a>';
+                            }
+                        }
+                        $data .=($this->view->current_page + 3) < $this->view->total_page ? '<li class="phan_trang">...</li>' :'';
+
+                        // nếu current_page < $this->view->total_page và total_page > 1 mới hiển thị nút prev
+                        if ($this->view->current_page < $this->view->total_page && $this->view->total_page > 1){
+                            $data .= '<a class="phan_trang" href="'.$url_admin.'&page='.($this->view->current_page+1).'">Next</a>';
+                        }
+                        echo $data;
+                        ?>
+                    </div>
+                    <style type="text/css">
+                        .phan_trang{
+                            display: inline;
+                        }
+                    </style>
+                </form>
             </div>
             <!-- /.card-body -->
           </div>

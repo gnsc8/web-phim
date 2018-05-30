@@ -13,17 +13,37 @@ class AdminDienVienController extends Controller
         $this->layout->tieu_de = "Danh sách diễn viên";
         $this->layout->meta_des ="Trang quản trị| danh sách diễn viên";
         $this->view->title = "DANH SÁCH Diễn Viên";
-       
-         $params = array();
+        $params = array();
         if(isset($_GET['search_hoten'])){
-            //1. kiểm tra hợp lệ của chuỗi search_username Việc này tự làm
 
-            //2. nếu kiểm tra ok thì gán vào mảng
             $params['search_hoten'] = $_GET['search_hoten'];
         }
 
         $objModel = new DienVienModel();
-        $this->view->list = $objModel->getList($params);
+
+        //phân trang
+        $this->view->total_records = $objModel->count($params);
+
+        //tìm limit và current_page
+        $this->view->current_page = isset($_GET['page']) ? $_GET['page'] : 1;
+        //số bản ghi trên 1 trang
+        $limit = 10;
+
+        // tổng số trang
+        $this->view->total_page = ceil($this->view->total_records / $limit);
+
+        // Giới hạn current_page trong khoảng 1 đến total_page
+        if ($this->view->current_page > $this->view->total_page){
+            $this->view->current_page = $this->view->total_page;
+        }
+        else if ($this->view->current_page < 1){
+            $this->view->current_page = 1;
+        }
+
+        // Tìm Start
+        $start = ($this->view->current_page - 1) * $limit;
+
+        $this->view->dien_vien = $objModel->getlist($params,$start,$limit);
 
     }
 
