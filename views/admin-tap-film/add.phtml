@@ -11,7 +11,7 @@ if (@$_POST['submit'] == 'thêm mới')
   <table>
   <tr>
       <td>Tên Film:</td>
-      <td><select  name="txt_ten_film">
+      <td><select class="form-control select2" style="width: 100%;" name="txt_ten_film">
         <?php
          foreach ($this->view->film as $row ){
                        echo "
@@ -19,7 +19,7 @@ if (@$_POST['submit'] == 'thêm mới')
                    ";
                    }
                    ?>
-                 </select>
+        </select>
 
       </td>
     </tr>

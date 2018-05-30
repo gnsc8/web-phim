@@ -10,30 +10,30 @@ $myText = (string)@$this->view->msg;
 
 if (@$_POST['submit'] == 'update')
     echo "<script type='text/javascript'>alert('$myText');
-    window.location.replace('?controller=admin-chi-tiet-the-loai');</script>";
-if(isset($this->view->objCT->error))
+    window.location.replace('?controller=admin-chi-tiet-danh-muc');</script>";
+if(isset($this->view->objDMCT->error))
 {
-    echo $this->view->objCT->error;
+    echo $this->view->objDMCT->error;
     return;
 }
-$obj = $this->view->objCT;
+$obj = $this->view->objDMCT;
 ?>
 
 
 <form action="" method="post">
-    <input type="text" name="txt_ten_film" value="<?php echo $obj->ten_film; ?>" readonly>
-    <select name="txt_ten_the_loai">
+    <input type="text" name="txt_ten_film" value="<?php echo $obj->ten_film; ?>" readonly></td>
+    <select name="txt_ten_danh_muc">
     	<?php
-               foreach ($this->view->the_loai as $row ){
-				if($row['id']==$obj->id_the_loai)
+               foreach ($this->view->danh_muc as $row ){
+				if($row['id']==$obj->id_danh_muc)
 
                	echo "
-                   <option selected value='{$row['id']}'>{$row['ten_the_loai']}</option>
+                   <option selected value='{$row['id']}'>{$row['ten_danh_muc']}</option>
                    ";
                    else
 
                    echo "
-                   <option value='{$row['id']}'>{$row['ten_the_loai']}</option>
+                   <option value='{$row['id']}'>{$row['ten_danh_muc']}</option>
                    ";
                }
         ?>

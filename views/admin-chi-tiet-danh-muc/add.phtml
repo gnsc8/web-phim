@@ -1,5 +1,5 @@
 <div class="container">
-<h1>Thêm mới thể loại</h1>
+<h1>Thêm mới danh mục</h1>
 <?php
 echo @$this->view->msg;
 ?>
@@ -21,11 +21,11 @@ echo @$this->view->msg;
                   </select></td>
 
 
-                  <td><select  name="txt_ten_the_loai">
+                  <td><select  name="txt_ten_danh_muc">
                       <?php
-                               foreach ($this->view->the_loai as $row ){
+                               foreach ($this->view->danh_muc as $row ){
                                    echo "
-                                   <option value='{$row['id']}'>{$row['ten_the_loai']}</option>
+                                   <option value='{$row['id']}'>{$row['ten_danh_muc']}</option>
                                    ";
                                }
                         ?>

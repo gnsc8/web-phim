@@ -4,7 +4,7 @@ ini_set('error_reporting', E_ALL);
 error_reporting(E_ALL);
 
 //1. Khai báo các đường dẫn:
-define('base_url','/MVC');
+define('base_url','/web-phim');
 define('app_path', __DIR__);
 define('view_path', app_path .'/views');
 define('layout_path', app_path .'/views/layout');

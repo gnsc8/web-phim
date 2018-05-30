@@ -6,18 +6,22 @@
  * Time: 11:03 CH
  */
 
-class ChiTietTheLoaiModel extends MyModel
+class ChiTietDanhMucModel extends MyModel
 {
     public $id;
     public $ten_film;
-    public $ten_the_loai;
-    public $tb_name="tb_chi_tiet_the_loai";
+    public $ten_danh_muc;
+    public $tb_name="tb_chi_tiet_danh_muc";
     public $tb_name_film="tb_film";
-    public $tb_name_the_loai="tb_the_loai";
+    public $tb_name_danh_muc="tb_danh_muc";
 
     public function getList($params = null){
 
-        $sql = "SELECT $this->tb_name.*,$this->tb_name_film.ten_film,$this->tb_name_the_loai.ten_the_loai FROM $this->tb_name inner join $this->tb_name_film on $this->tb_name.id_film=$this->tb_name_film.id inner join $this->tb_name_the_loai on $this->tb_name.id_the_loai=$this->tb_name_the_loai.id ORDER  BY $this->tb_name.id DESC ";
+        $sql = "SELECT tb_chi_tiet_danh_muc.*,tb_film.ten_film,tb_danh_muc.ten_danh_muc 
+FROM tb_chi_tiet_danh_muc 
+inner join tb_film on tb_chi_tiet_danh_muc.id_film=tb_film.id 
+inner join tb_danh_muc on tb_chi_tiet_danh_muc.id_danh_muc=tb_danh_muc.id 
+ORDER  BY tb_chi_tiet_danh_muc.id DESC";
 
         $res = $this->ExecQuery($sql); // hàm exec này được kế thừa từ lớp cha MyModel.
 
@@ -32,8 +36,8 @@ class ChiTietTheLoaiModel extends MyModel
     }
     public function SaveNew($params = null){
 
-        $sqlInsert = "INSERT INTO $this->tb_name(id_film,id_the_loai)
-          VALUES ('$this->ten_film','$this->ten_the_loai')";
+        $sqlInsert = "INSERT INTO $this->tb_name(id_film,id_danh_muc)
+          VALUES ('$this->ten_film','$this->ten_danh_muc')";
 
         $res = mysqli_query($this->getConn(),$sqlInsert);
 
@@ -46,7 +50,12 @@ class ChiTietTheLoaiModel extends MyModel
             return "Không insert được";
     }
     public function loadOne($id){
-        $sql = "SELECT $this->tb_name.*,$this->tb_name_film.ten_film,$this->tb_name_the_loai.ten_the_loai FROM $this->tb_name inner join $this->tb_name_film on $this->tb_name.id_film=$this->tb_name_film.id inner join $this->tb_name_the_loai on $this->tb_name.id_the_loai=$this->tb_name_the_loai.id WHERE $this->tb_name.id= $id";
+        $sql = "SELECT tb_chi_tiet_danh_muc.*,tb_film.ten_film,tb_danh_muc.ten_danh_muc 
+FROM tb_chi_tiet_danh_muc 
+inner join tb_film on tb_chi_tiet_danh_muc.id_film=tb_film.id 
+inner join tb_danh_muc on tb_chi_tiet_danh_muc.id_danh_muc=tb_danh_muc.id 
+WHERE tb_chi_tiet_danh_muc.id = $id
+ORDER  BY tb_chi_tiet_danh_muc.id DESC";
         $objRes = new stdClass();
         $res = mysqli_query($this->getConn(), $sql);
         if(mysqli_errno($this->getConn()))
@@ -68,11 +77,10 @@ class ChiTietTheLoaiModel extends MyModel
 
     }
 
-    public function SaveUpdate(){
+    public function SaveUpdate($id,$id_film,$id_dm){
 
-        $sqlUpdate = "Update $this->tb_name SET id_film='$this->ten_film',id_the_loai='$this->ten_the_loai'
-                    WHERE id = $this->id
-                    ";
+        $sqlUpdate = "Update $this->tb_name SET id_film='$id_film',id_danh_muc='$id_dm'
+                    WHERE $this->tb_name.id =$id";
 
 
         $res = mysqli_query($this->getConn(),$sqlUpdate);
@@ -86,8 +94,8 @@ class ChiTietTheLoaiModel extends MyModel
             return "Không cập nhật  được";
 
     }
-    public function getTheLoai(){
-        $sql = "SELECT * FROM tb_the_loai";
+    public function getDanhMuc(){
+        $sql = "SELECT * FROM tb_danh_muc";
         $res = $this->ExecQuery($sql); // hàm exec này được kế thừa từ lớp cha MyModel.
 
         $data = array();
