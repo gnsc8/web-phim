@@ -54,13 +54,19 @@ class AdminFilmController extends Controller
         // tạo model
         $objModelFilm = new FilmModel();
             //***** xử lý phân trang 
-        $currentPage = @intval($_GET['page']);
-        if($currentPage <=0)
-            $currentPage = 1;
+        //$currentPage = @intval($_GET['page']);
+//        if($currentPage <=0)
+//            $currentPage = 1;
         $this->view->total_records = $objModelFilm->countList($params);
+        //tìm limit và current_page
         $this->view->current_page = isset($_GET['page']) ? $_GET['page'] : 1;
+        //số bản ghi trên 1 trang
         $limit = 10;
+
+        // tổng số trang
         $this->view->total_page = ceil($this->view->total_records / $limit);
+
+        // Giới hạn current_page trong khoảng 1 đến total_page
         if ($this->view->current_page > $this->view->total_page){
             $this->view->current_page = $this->view->total_page;
         }
@@ -71,45 +77,11 @@ class AdminFilmController extends Controller
         // Tìm Start
         $start = ($this->view->current_page - 1) * $limit;
 
-        // $this->view->the_loai = $objModelTL->getTheLoai($start,$limit,$id);
-        // Đếm tổng số bản ghi có thỏa mãn điều kiện lọc nếu có
-        // $tong_so = $objModelFilm->countList($params);
-        // if(!is_numeric($tong_so))
-        // {
-        //     die("Loi khong dem duoc du lieu");
-        // }
-        // echo '<pre>'.__FILE__.'::'.__FUNCTION__.'('.__LINE__.')<br>';
-        //     print_r($tong_so);
-        // echo '</pre>';
-        
-        // $limit = number_row_per_page;
-        // // Tính ra xem có tổng số bao nhiêu trang
-        // $tong_so_trang = ceil($tong_so/$limit);
-        // var_dump($tong_so_trang);   
-        // if($currentPage> $tong_so_trang) 
-        //     $currentPage = $tong_so_trang;
-        // $offset = ($currentPage -1) * $limit;
-        //  $params['offset'] = $offset;
-        //  $params['limit'] = $limit;
-        //     echo "Trang hien tai: ". $currentPage;
-        //     echo "<br>Tong so trang: $tong_so_trang ";
-        //     echo '<pre>'.__FILE__.'::'.__FUNCTION__.'('.__LINE__.')<br>';
-        //         print_r($params);
-        //     echo '</pre>';
-            // vào model viết lệnh cho hàm loadlit
-        
-        // tính toán phân trang trên tổng số bản ghi đó. 
-    
-
-
-
-
         // tạo model
-        $objModel = new FilmModel();
-        $this->view->list =$objModel->getList($params,$start,$limit);
-        $this->view->danh_muc =$objModel->getDanhMuc();
-        $this->view->nam_phat_hanh =$objModel->getNamPhatHanh();
-        $this->view->quoc_gia = $objModel->getQuocGia();
+        $this->view->list =$objModelFilm->getList($params,$start,$limit);
+        $this->view->danh_muc =$objModelFilm->getDanhMuc();
+        $this->view->nam_phat_hanh =$objModelFilm->getNamPhatHanh();
+        $this->view->quoc_gia = $objModelFilm->getQuocGia();
    }
 
     public function addAction(){

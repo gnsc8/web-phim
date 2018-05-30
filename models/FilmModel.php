@@ -90,7 +90,7 @@ class FilmModel extends MyModel
         $row = mysqli_fetch_assoc($res);
 
         $data = $row['tong'];
-
+         print_r($data);
         return $data;
 
 
@@ -130,7 +130,7 @@ class FilmModel extends MyModel
 
         if (isset($params['search_nam_phat_hanh']) && strlen($params['search_nam_phat_hanh']) > 0) {
             if ($strWhere == '')
-                $strWhere .= " WHERE $this->tb_name_nph.id ='1' ";
+                $strWhere .= " WHERE $this->tb_name_nph.id ='{$params['search_nam_phat_hanh']}' ";
             else
                 $strWhere .= " AND  $this->tb_name_nph.id ='{$params['search_nam_phat_hanh']}' ";
         }
@@ -344,7 +344,7 @@ INNER JOIN tb_film as tb3 ON tb_tap_film.id_film = tb3.id
 WHERE tb_tap_film.id IN (select max(tb2.id) from tb_tap_film as tb2 GROUP BY tb2.id_film)
 AND tb_tap_film.id_film IN (select DISTINCT id_film from tb_chi_tiet_danh_muc as tb3  WHERE id_danh_muc = 1)
 ORDER BY tb_tap_film.id desc
-limit 8";
+limit 1,8";
         $res = $this->ExecQuery($sql); // hàm exec này được kế thừa từ lớp cha MyModel.
 
         $data = array();
@@ -364,7 +364,7 @@ INNER JOIN tb_film as tb3 ON tb_tap_film.id_film = tb3.id
 WHERE tb_tap_film.id IN (select max(tb2.id) from tb_tap_film as tb2 GROUP BY tb2.id_film) 
 AND tb_tap_film.id_film IN (select DISTINCT id_film from tb_chi_tiet_danh_muc as tb3  WHERE id_danh_muc = 2)  
 ORDER BY tb_tap_film.id desc
-limit 8";
+limit 1,8";
         $res = $this->ExecQuery($sql); // hàm exec này được kế thừa từ lớp cha MyModel.
 
         $data = array();
@@ -384,7 +384,7 @@ INNER JOIN tb_film as tb3 ON tb_tap_film.id_film = tb3.id
 WHERE tb_tap_film.id IN (select max(tb2.id) from tb_tap_film as tb2 GROUP BY tb2.id_film) 
 AND tb_tap_film.id_film IN (select DISTINCT id_film from tb_chi_tiet_danh_muc as tb3  WHERE id_danh_muc = 3)  
 ORDER BY tb_tap_film.id desc
-limit 8";
+limit 1,8";
         $res = $this->ExecQuery($sql); // hàm exec này được kế thừa từ lớp cha MyModel.
 
         $data = array();
@@ -404,7 +404,7 @@ INNER JOIN tb_film as tb3 ON tb_tap_film.id_film = tb3.id
 WHERE tb_tap_film.id IN (select max(tb2.id) from tb_tap_film as tb2 GROUP BY tb2.id_film) 
 AND tb_tap_film.id_film IN (select DISTINCT id_film from tb_chi_tiet_danh_muc as tb3  WHERE id_danh_muc = 4)  
 ORDER BY tb_tap_film.id desc
-limit 8";
+limit 1,8";
         $res = $this->ExecQuery($sql); // hàm exec này được kế thừa từ lớp cha MyModel.
 
         $data = array();

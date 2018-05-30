@@ -17,21 +17,51 @@ class AdminTapFilmController extends Controller
         // admin-chuc-nang
         // LOAD MODEL
 
+        //phân trang
         $objModel = new TapFilmModel();
-        $this->view->list = $objModel->getList();
+
+        $this->view->total_records = $objModel->countTapFilm();
+
+        //tìm limit và current_page
+        $this->view->current_page = isset($_GET['page']) ? $_GET['page'] : 1;
+        //số bản ghi trên 1 trang
+        $limit = 10;
+
+        // tổng số trang
+        $this->view->total_page = ceil($this->view->total_records / $limit);
+
+        // Giới hạn current_page trong khoảng 1 đến total_page
+        if ($this->view->current_page > $this->view->total_page){
+            $this->view->current_page = $this->view->total_page;
+        }
+        else if ($this->view->current_page < 1){
+            $this->view->current_page = 1;
+        }
+
+        // Tìm Start
+        $start = ($this->view->current_page - 1) * $limit;
+
+        $this->view->tap_film = $objModel->getlist($start,$limit);
+
 
     }
 
     public function addAction(){
-       $this->layout->meta_des ="Trang quản trị| Thêm Tập Film Mới";
         $objModel = new TapFilmModel();
+        if (isset($_GET['id'])){
+            $id= intval($_GET['id']);
+            $this->view->loadOne = $objModel->loadOne($id);
+        }
+       $this->layout->meta_des ="Trang quản trị| Thêm Tập Film Mới";
+
+
         $this->view->film = $objModel->getFilm();
         //1. Kiểm tra hợp lệ của dữ liệu
         if(isset($_POST['submit'])) {
 
             //2. Tạo model xử lý ghi vào CSDL
             $obModel = new TapFilmModel();
-            $obModel->ten_film =$_POST['txt_ten_film'];
+            $obModel->ten_film = isset($_GET['id']) ? $obModel->ten_film = $id : $_POST['txt_ten_film'];
             $obModel->ten_tap = $_POST['txt_ten_tap'];
             $obModel->link_fb = $_POST['txt_link_fb'];
             $obModel->link_gd = $_POST['txt_link_gd'];
