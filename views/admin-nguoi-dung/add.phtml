@@ -1,0 +1,23 @@
+<div class="container">
+<h1>Thêm mới Khách hàng</h1>
+<?php
+echo @$this->view->msg;
+if(isset($this->view->objKH->error))
+{
+    echo $this->view->objKH->error;
+    return;
+}
+?>
+
+<form action="" method="post">
+    <table>
+        <tr><td>Họ tên</td><td><input type="text" name="ho_ten"></td></tr>
+        <tr><td>Username</td><td><input type="text" name="txt_username"></td></tr>
+        <tr><td>Password</td><td><input type="Password" name="txt_pas"></td></tr>
+        <tr><td>Địa chỉ</td><td><input type="text" name="dia_chi"></td></tr>
+        <tr><td>Điện thoại</td><td><input type="number" name="dien_thoai"></td></tr>
+        <tr><td>Email</td><td><input type="text" name="email"></td></tr>
+        <tr><td></td><td><input type="submit" value="thêm mới"></td></tr>
+    </table>
+</form>
+</div>

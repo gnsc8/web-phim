@@ -1,0 +1,19 @@
+<div class="container">
+<h1>Chỉnh sửa năm phát hành</h1>
+<?php
+echo @$this->view->msg;
+if(isset($this->view->objNPH->error))
+{
+    echo $this->view->objNPH->error;
+    return;
+}
+$obj = $this->view->objNPH;
+?>
+
+
+<form action="" method="post">
+    <input type="text" placeholder=" Năm phát hành" name="txt_nam_phat_hanh" value="<?php echo $obj->nam_phat_hanh; ?>" ><br>
+    <input type="submit">
+
+</form>
+</div>

@@ -1,0 +1,24 @@
+<div class="container">
+<h1>Thêm mới đạo diễn</h1>
+<?php
+echo @$this->view->msg;
+if(isset($this->view->objDD->error))
+{
+    echo $this->view->objDD->error;
+    return;
+}
+?>
+
+<form action="" method="post">
+    <table>
+        <tr>
+            <th>Tên Đạo Diễn</th><td><input type="text" name="txt_ten_dao_dien"></td>
+
+        </tr>
+        <tr>
+            <th>Giới Thiệu</th><td><textarea type="text" name="txt_gioi_thieu"></textarea></td>
+        </tr>
+        <tr><td><input type="submit"><td></tr>
+    </table>
+</form>
+</div>

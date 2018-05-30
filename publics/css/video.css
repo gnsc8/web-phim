@@ -1,0 +1,88 @@
+a{
+    text-decoration: none;
+}
+a:hover{
+    text-decoration: none;
+}
+.list-tap{
+    display: inline-block;
+
+}
+a.a-tap {
+    color: #d80808;
+    width: 77px;
+    font-size: 15px;
+    height: 34px;
+    border-radius: 6px;
+    text-align: center;
+    line-height: 33px;
+    background-color: #1cef35;
+    display: block;
+    margin: 5px;
+    -webkit-transition: all 0.3s cubic-bezier(0.4, 0, 1, 1);
+    -moz-transition: all 0.3s cubic-bezier(0.4, 0, 1, 1);
+    -ms-transition: all 0.3s cubic-bezier(0.4, 0, 1, 1);
+    -o-transition: all 0.3s cubic-bezier(0.4, 0, 1, 1);
+    transition: all 0.3s cubic-bezier(0.4, 0, 1, 1);
+}
+a.a-tap:hover{
+    color: #1cef35;
+    background: #d80808;
+}
+ul.ul-tap{
+    width: 960px;
+    text-align: center;
+    margin: 0px auto;
+    margin-top: 10px;
+}
+.video{
+    width: 1000px;
+    height: 590px;
+}
+#my_video {
+    width: 100%!important;
+    min-height: 590px;
+    position: relative;
+    z-index: 999;
+}
+.phim-video{
+    text-transform: capitalize;
+    color: #1cef35;
+    -webkit-transition: all 0.3s cubic-bezier(0.4, 0, 1, 1);
+    -moz-transition: all 0.3s cubic-bezier(0.4, 0, 1, 1);
+    -ms-transition: all 0.3s cubic-bezier(0.4, 0, 1, 1);
+    -o-transition: all 0.3s cubic-bezier(0.4, 0, 1, 1);
+    transition: all 0.3s cubic-bezier(0.4, 0, 1, 1);
+}
+.phim-video:hover{
+    color: #d80808;
+}
+@media screen and (max-width: 1050px){
+    .video{
+        width: 100%;
+        height: auto;
+    }
+}
+@media screen and (max-width: 991px){
+    #my_video{
+        min-height: 470px;
+    }
+    ul.ul-tap{
+        width: 100%;
+    }
+}
+@media screen and (max-width: 650px){
+    #my_video{
+        min-height: 380px;
+    }
+}
+@media screen and (max-width: 500px){
+    #my_video{
+        min-height: 320px;
+    }
+}
+@media screen and (max-width: 370px){
+    #my_video{
+        min-height: 270px;
+    }
+}

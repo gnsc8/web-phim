@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <link rel="shortcut icon" type="image/png" href="/MVC/images/2.png"/>
+  <title>Xem Phim Online</title>
+  <!-- Latest compiled and minified CSS & JS -->
+  <link rel="stylesheet" href="/MVC/bootstrap/css/bootstrap.min.css">
+  <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="/MVC/css/header-footer.css">
+  <link rel="stylesheet" href="/MVC/css/main.css">
+  <link rel="stylesheet" href="/MVC/css/thong-tin-phim.css">
+  <script src="/MVC/js/jquery.min.js"></script>
+  <script src="/MVC/bootstrap/js/bootstrap.min.js"></script>
+  
+  <!-- js menu -->
+  <script type="text/javascript">
+    $(document).ready(function(){
+      $(".dropdown").hover(            
+        function() {
+          $('.dropdown-menu', this).not('.in .dropdown-menu').stop(true,true).slideDown("400");
+          $(this).toggleClass('open');        
+        },
+        function() {
+          $('.dropdown-menu', this).not('.in .dropdown-menu').stop(true,true).slideUp("400");
+          $(this).toggleClass('open');       
+        }
+        );
+    });
+  </script>
+</head>
+<body>
+  <header style="height:50px;width: 100%;background: #fff;">
+   <div class="container">    
+    <nav class="navbar navbar-default" style="position: fixed; z-index: 9999;">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse-2">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#">
+            <img class="logo2" src="/MVC/images/logo2.png" alt="">
+          </a>
+        </div>
+        <div class="collapse navbar-collapse" id="navbar-collapse-2">
+          <ul class="nav navbar-nav navbar-right">
+            <li><a class="active hover" href="#">Home</a></li>
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Thể loại</a>
+              <ul class="dropdown-menu multi-columns columns-3" role="menu">
+                <div class="row">
+                  <div class="col-sm-4">
+                    <ul class="multi-column-dropdown">
+                      <li><a href="#">Action</a></li>
+                      <li><a href="#">Another action</a></li>
+                      <li><a href="#">Something else here</a></li>
+                      <li><a href="#">Separated link</a></li>
+                    </ul>
+                  </div>
+                  <div class="col-sm-4">
+                    <ul class="multi-column-dropdown">
+                      <li><a href="#">Action</a></li>
+                      <li><a href="#">Another action</a></li>
+                      <li><a href="#">Something else here</a></li>
+                      <li><a href="#">Separated link</a></li>
+                    </ul>
+                  </div>
+                  <div class="col-sm-4">
+                    <ul class="multi-column-dropdown">
+                      <li><a href="#">Action</a></li>
+                      <li><a href="#">Another action</a></li>
+                      <li><a href="#">Something else here</a></li>
+                      <li><a href="#">Separated link</a></li>
+                    </ul>
+                  </div>
+                </div>
+              </ul>
+            </li>
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Quốc gia</a>
+              <ul class="dropdown-menu" role="menu">
+                <li><a href="#">Action</a></li>
+                <li><a href="#">Another action</a></li>
+                <li><a href="#">Something else here</a></li>
+                <li><a href="#">Separated link</a></li>
+              </ul>
+            </li>
+            <li><a href="#">Phim lẻ</a></li>
+            <li><a href="#">Phim bộ</a></li>
+            <li><a href="#">Thuyết minh</a></li>
+            <li><a href="#">Hoạt hình</a></li>
+            <li>
+              <a class="btn btn-default btn-outline btn-circle collapsed"  data-toggle="collapse" href="#nav-collapse2" aria-expanded="false" aria-controls="nav-collapse2">Sign in</a>
+            </li>
+            <li>
+              <a class="btn btn-default btn-outline btn-circle collapsed"  data-toggle="collapse" href="#nav-collapse3" aria-expanded="false" aria-controls="nav-collapse3">Search</a>
+            </li>
+          </ul>
+
+          <div class="collapse nav navbar-nav nav-collapse slide-down" id="nav-collapse2">
+            <form class="navbar-form navbar-right form-inline" role="form">
+              <div class="form-group">
+                <label class="sr-only" for="Email">Username</label>
+                <input type="email" class="form-control" id="Email" placeholder="Email" autofocus required />
+              </div>
+              <div class="form-group">
+                <label class="sr-only" for="Password">Password</label>
+                <input type="password" class="form-control" id="Password" placeholder="Password" required />
+              </div>
+              <button type="submit" class="btn btn-success">Login</button>
+              <button type="submit" class="btn btn-success">Sign Up</button>
+            </form>
+          </div>
+
+          <div class="collapse nav navbar-nav nav-collapse slide-down" id="nav-collapse3">
+            <form class="navbar-form navbar-right" role="search">
+              <div class="form-group">
+                <input type="text" class="form-control" placeholder="Search" />
+              </div>
+              <button type="submit" class="btn btn-danger"><span class="fa fa-search" aria-hidden="true"></span></button>
+            </form>
+          </div>
+
+        </div>
+      </div>
+    </nav>
+  </div>
+</header>
+<!-- end header -->
+<!-- main -->
+<main>
+  <section>
+    <div class="info-detail">
+      <div class="container">
+        <div class="thumb">
+          <img src="girl.jpg" alt="" width="240">
+        </div>
+        <div class="content-info-detail">
+          <div class="title-phim">
+            <a href="">
+              <h1>tên phim(tiếng việt)</h1>
+            </a>
+            <span>
+                <h6>tên phim(tiếng anh)</h6>
+            </span>
+          </div>
+          <!-- đánh giá sao -->
+          <img src="" alt="" width="25">
+          <span>0</span>/10
+          <div class="xem-phim hidden-xs">
+          <a href="./video.html">Xem phim</a>
+        </div>
+          <div class="xem-phim-2 visible-xs">
+            <a href="">Xem phim</a>
+          </div>
+          <div class="block">
+            Diễn viên:
+            <a class="hightlight _search_name" href="#">Từ Khai Sinh</a>, 
+            <a class="hightlight _search_name" href="#">Hoàng Cảnh Du</a>, 
+            <a class="hightlight _search_name" href="#">Tống Thiến</a><br>
+            Đạo diễn:
+            <a class="hightlight _search_name" href="#">Trần Chính Đạo</a>, 
+            <a class="hightlight _search_name" href="#">Hứa Triệu Nhậm</a><br>
+            Thể loại: 
+            <a href="#" class="hightlight">Phim Tình Cảm</a><br>
+            Quốc gia: 
+            <a href="#" class="hightlight">Trung Quốc</a><br>
+            Thời lượng: <span class="hightlight">45 min</span><br>
+            Năm sản xuất: <span class="hightlight">2018</span><br>
+            URL:
+            <a class="hightlight" href="#">hgfilm.net</a>
+          </div>
+
+        </div>
+        
+        <!-- nội dung phim -->
+        <div class="box-content">
+        <div class="block keyword">
+            <h2>Giới thiệu phim Kết Ái: Mối Tình Đầu Của Thiên Tuế Đại Nhân:</h2>
+        </div>
+          <div class="content-film">
+          Bộ phim Kết Ái: Mối Tình Đầu Của Thiên Tuế Đại Nhân xoay quanh mối quan hệ giữa cô phóng viên thực tập Quan Bì Bì và chuyên gia nghiên cứu văn hóa Hạ Lan Tĩnh Đình. Ban đầu, Quan Bì Bì xin được phỏng vấn Hạ Lan Tĩnh Đình, song liên tục bị anh từ chối.Khi bí mật theo dõi anh, Bì Bì vô cùng sốc khi biết: Hạ Lan Tĩnh Đình thường ăn hoa, thích tắm mình trong ánh trăng, ban ngày không nhìn thấy gì nhưng thị lực ban đêm lại cực nhạy bén, nhịp tim duy trì ở mức 3 nhịp/phút. Đồng thời, Hạ Lan Tĩnh Đình còn tiết lộ, anh là người ngoài hành tinh, đến từ một nơi được tạo nên từ carbon.Quan Bì Bì cảm thấy vô cùng khó tin và cho rằng, Hạ Lan Tĩnh Đình đang trêu mình. Thế nhưng sau đó, rất nhiều chuyện xảy đến khiến cô nhận ra, đây không phải câu nói đùa. Vào lúc ấy, bạn trai thanh mai trúc mã của Bì Bì lại phản bội cô, khiến cô cảm thấy mình bị thế giới này ruồng bỏ. Chỉ có Hạ Lan Tĩnh Đình ở bên cạnh và mang đến sự ấm áp cho Bì Bì. Từ đó, Bì Bì đã rơi vào lưới tình với anh, còn bỏ công sức nghiên cứu về hành tinh của anh. Chẳng ngờ rằng, mối quan hệ đầy duyên phận của họ lại phải chịu thêm những thử thách khó lường khác.
+        </div>
+        </div>
+      </div>
+    </div>
+    <div class="comment-fb">
+      <div class="container">
+        <div class="fb-like fb_iframe_widget">
+          <!-- phần fanpage fb -->
+        </div>
+      </div>
+    </div>
+    <div class="comment-fb">
+      <div class="container">
+        <div class="fb-comments fb_iframe_widget">
+          <!-- phần comment -->
+        </div>
+      </div>
+    </div>
+    <div class="relate">
+      <section class="movie">
+        <div class="container">
+          <div class="wrap-item">
+            <div class="title-section">
+              <span>Phim cùng thể loại</span>
+            </div>
+            <div class="mv-group" style="">
+              <div class="mv-item ">
+                <div class="mv-item-iner">
+                  <a href="/phim/tan-y-thien-do-long-ky-2018/" class="img-item ">
+                    <div class="mv-item-img" style="background: url(http://s.aphim.co/uploads/film/images/modsz/20180515/9fd88c5c33342b6600afd0297f135306_206_320.jpg) no-repeat scroll center top / cover;" alt="Tân Ỷ Thiên Đồ Long Ký" title="Tân Ỷ Thiên Đồ Long Ký">
+                    </div>
+                    <i class="btn-play"><img src="http://aphim.co/asset_blade/images/btn-play.png" width="50"></i>
+                  </a>
+                  <span class="label" style="background-color: #4A90E2;">T-1</span>
+                </div>
+                <div class="mv-item-info">
+                  <a href="/phim/tan-y-thien-do-long-ky-2018/" class="mv-title">Tân Ỷ Thiên Đồ Long Ký</a>
+                </div>
+              </div>
+              <div class="mv-item ">
+                <div class="mv-item-iner">
+                  <a href="/phim/tan-y-thien-do-long-ky-2018/" class="img-item ">
+                    <div class="mv-item-img" style="background: url(http://s.aphim.co/uploads/film/images/modsz/20180515/9fd88c5c33342b6600afd0297f135306_206_320.jpg) no-repeat scroll center top / cover;" alt="Tân Ỷ Thiên Đồ Long Ký" title="Tân Ỷ Thiên Đồ Long Ký">
+                    </div>
+                    <i class="btn-play"><img src="http://aphim.co/asset_blade/images/btn-play.png" width="50"></i>
+                  </a>
+                  <span class="label" style="background-color: #4A90E2;">T-1</span>
+                </div>
+                <div class="mv-item-info">
+                  <a href="/phim/tan-y-thien-do-long-ky-2018/" class="mv-title">Tân Ỷ Thiên Đồ Long Ký</a>
+                </div>
+              </div>
+              <div class="mv-item ">
+                <div class="mv-item-iner">
+                  <a href="/phim/tan-y-thien-do-long-ky-2018/" class="img-item ">
+                    <div class="mv-item-img" style="background: url(http://s.aphim.co/uploads/film/images/modsz/20180515/9fd88c5c33342b6600afd0297f135306_206_320.jpg) no-repeat scroll center top / cover;" alt="Tân Ỷ Thiên Đồ Long Ký" title="Tân Ỷ Thiên Đồ Long Ký">
+                    </div>
+                    <i class="btn-play"><img src="http://aphim.co/asset_blade/images/btn-play.png" width="50"></i>
+                  </a>
+                  <span class="label" style="background-color: #4A90E2;">T-1</span>
+                </div>
+                <div class="mv-item-info">
+                  <a href="/phim/tan-y-thien-do-long-ky-2018/" class="mv-title">Tân Ỷ Thiên Đồ Long Ký</a>
+                </div>
+              </div>
+              <div class="mv-item ">
+                <div class="mv-item-iner">
+                  <a href="/phim/tan-y-thien-do-long-ky-2018/" class="img-item ">
+                    <div class="mv-item-img" style="background: url(http://s.aphim.co/uploads/film/images/modsz/20180515/9fd88c5c33342b6600afd0297f135306_206_320.jpg) no-repeat scroll center top / cover;" alt="Tân Ỷ Thiên Đồ Long Ký" title="Tân Ỷ Thiên Đồ Long Ký">
+                    </div>
+                    <i class="btn-play"><img src="http://aphim.co/asset_blade/images/btn-play.png" width="50"></i>
+                  </a>
+                  <span class="label" style="background-color: #4A90E2;">T-1</span>
+                </div>
+                <div class="mv-item-info">
+                  <a href="/phim/tan-y-thien-do-long-ky-2018/" class="mv-title">Tân Ỷ Thiên Đồ Long Ký</a>
+                </div>
+              </div>
+              <div class="mv-item ">
+                <div class="mv-item-iner">
+                  <a href="/phim/tan-y-thien-do-long-ky-2018/" class="img-item ">
+                    <div class="mv-item-img" style="background: url(http://s.aphim.co/uploads/film/images/modsz/20180515/9fd88c5c33342b6600afd0297f135306_206_320.jpg) no-repeat scroll center top / cover;" alt="Tân Ỷ Thiên Đồ Long Ký" title="Tân Ỷ Thiên Đồ Long Ký">
+                    </div>
+                    <i class="btn-play"><img src="http://aphim.co/asset_blade/images/btn-play.png" width="50"></i>
+                  </a>
+                  <span class="label" style="background-color: #4A90E2;">T-1</span>
+                </div>
+                <div class="mv-item-info">
+                  <a href="/phim/tan-y-thien-do-long-ky-2018/" class="mv-title">Tân Ỷ Thiên Đồ Long Ký</a>
+                </div>
+              </div>
+              <div class="mv-item ">
+                <div class="mv-item-iner">
+                  <a href="/phim/tan-y-thien-do-long-ky-2018/" class="img-item ">
+                    <div class="mv-item-img" style="background: url(http://s.aphim.co/uploads/film/images/modsz/20180515/9fd88c5c33342b6600afd0297f135306_206_320.jpg) no-repeat scroll center top / cover;" alt="Tân Ỷ Thiên Đồ Long Ký" title="Tân Ỷ Thiên Đồ Long Ký">
+                    </div>
+                    <i class="btn-play"><img src="http://aphim.co/asset_blade/images/btn-play.png" width="50"></i>
+                  </a>
+                  <span class="label" style="background-color: #4A90E2;">T-1</span>
+                </div>
+                <div class="mv-item-info">
+                  <a href="/phim/tan-y-thien-do-long-ky-2018/" class="mv-title">Tân Ỷ Thiên Đồ Long Ký</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+  </section>
+</main>
+<!-- end main -->
+<!-- footer -->
+<footer>
+
+  <div class="container">
+    <div class="inner text-center">
+      <a href="/" class="logo-footer"><img src="/MVC/images/logo2.png" width="150" title="HGFilm - Website xem phim online trực tuyến miễn phí" alt="HGFilm - Website xem phim online trực tuyến miễn phí"></a>
+      <ul class="list-inline">
+
+        <li><a href="">Điều khoản sử dụng</a></li>
+        <li><a href="">Chính sách riêng tư</a></li>
+        <li><a href="">Nguyên tắc Cộng Đồng</a></li>
+        <li><a href="">Liên hệ Quảng Cáo</a></li>
+
+
+      </ul>
+      <p>Đồ án của học viên : Nguyễn Trường Giang & Đào Minh Hiếu</p>
+    </div>
+  </div>
+</footer>
+<!-- end footer -->
+</body>
+</html>

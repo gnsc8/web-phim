@@ -1,0 +1,48 @@
+<div class="container">
+<h1>Sửa Link Film</h1>
+<?php
+$myText = (string)@$this->view->msg;
+if(isset($this->view->objTF->error))
+{
+    echo $this->view->objTF->error;
+    return;
+}
+$obj = $this->view->objTF;
+if (@$_POST['submit'] == 'update')
+    echo "<script type='text/javascript'>alert('$myText');
+    window.location.replace('?controller=admin-tap-film');</script>";
+
+?>
+
+
+<form action="" method="post">
+	<table>
+	<tr>
+    	<td>Tên Film:</td>
+    	<td><input type="text"  name="txt_ten_film" value="<?php echo $obj->ten_film; ?>" readonly ></td>
+    </tr>
+    <tr>
+    	<td>Tên Tập:</td>
+    	<td><input type="text" placeholder=" Tên Tập" name="txt_ten_tap" value="<?php echo $obj->ten_tap;?>" ></td>
+    </tr>
+    <tr>
+    	<td>Link FB:</td>
+    	<td>
+    		<input type="text" placeholder=" Link FB" name="txt_link_fb" value="<?php echo $obj->link_fb;?>" >
+    	</td>
+    </tr>    
+    <tr>
+    	<td>Link GD:</td>
+    	<td><input type="text" placeholder=" Link gd" name="txt_link_gd" value="<?php echo $obj->link_gd;?>"></td>
+    </tr>
+     <tr>
+    	<td>Link OP:</td>
+    	<td><input type="text" placeholder=" Link OP" name="txt_link_op" value="<?php echo $obj->link_op;?>" ></td>
+    </tr>
+     <tr>
+    	<td></td>
+    	<td><input type="submit" name="submit" value="update"></td>
+    </tr>
+	</table>
+</form>
+</div>

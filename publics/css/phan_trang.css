@@ -1,0 +1,25 @@
+.pagination{
+    clear: both;
+    text-align: center;
+    display: block;
+    width: 100%;
+    padding: 10px 0px 10px 0px;
+}
+.phan_trang{
+    padding: 10px 15px 10px 15px;
+    border-radius: 8px;
+    color: white;
+    margin: 0px 2px 0px 2px;
+    text-decoration: none;
+    background: black;
+    -webkit-transition: all 0.3s cubic-bezier(0.4, 0, 1, 1);
+    -moz-transition: all 0.3s cubic-bezier(0.4, 0, 1, 1);
+    -ms-transition: all 0.3s cubic-bezier(0.4, 0, 1, 1);
+    -o-transition: all 0.3s cubic-bezier(0.4, 0, 1, 1);
+    transition: all 0.3s cubic-bezier(0.4, 0, 1, 1);
+}
+.phan_trang:hover{
+    background-color: white;
+    color: black;
+    text-decoration: none;
+}

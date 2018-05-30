@@ -1,0 +1,33 @@
+.table-admin{
+    width: 216px;
+    height: 165px;
+    background: #4178deb3;
+    padding: 7px;
+    margin-top: 15px;
+    border-radius: 24px;
+    font-size: 16px;
+}
+.table-admin ul{
+	list-style:none;
+	margin:5px;
+	padding:0px;
+}
+.table-admin ul li a{
+		color: #555;
+		font-style: italic;
+		text-decoration:none;
+		padding:8px;
+		display:block;
+		white-space:pre;
+}
+.tieu-de{
+	color:#ca2323;
+	font-weight:bold;
+	font-size: 18px;
+}
+.table-admin ul li:hover{
+	background: #ccc;
+	border-radius: 24px;
+
+	
+}

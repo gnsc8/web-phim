@@ -1,0 +1,19 @@
+<div class="container">
+<h1>Chỉnh sửa</h1>
+<?php
+echo @$this->view->msg;
+if(isset($this->view->objNTK->error))
+{
+    echo $this->view->objNTK->error;
+    return;
+}
+$obj = $this->view->objNTK;
+?>
+
+
+<form action="" method="post">
+    <input type="text" placeholder=" Tên Nhóm" name="txt_ten_nhom" value="<?php echo $obj->ten_nhom; ?>" ><br>
+    <input type="submit">
+
+</form>
+</div>

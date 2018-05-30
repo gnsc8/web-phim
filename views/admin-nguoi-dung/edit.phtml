@@ -1,0 +1,23 @@
+<div class="container">
+<h1>Chỉnh sửa khách hàng</h1>
+<?php
+echo @$this->view->msg;
+if(isset($this->view->objKH->error))
+{
+    echo $this->view->objKH->error;
+    return;
+}
+$obj = $this->view->objKH;
+?>
+
+
+<form action="" method="post">
+    <input type="text" placeholder="ID" value="<?php echo $obj->id; ?>" readonly ><br>
+    <input type="text" placeholder="Họ tên" name="txt_ho_ten" value="<?php echo $obj->ho_ten; ?>" ><br>
+    <input type="text" placeholder="Địa chỉ Khách hàng" name="txt_dia_chi" value="<?php echo $obj->dia_chi; ?>" ><br>
+    <input type="text" placeholder="Điện thoại" name="txt_dien_thoai" value="<?php echo $obj->dien_thoai; ?>" ><br>
+    <input type="text" placeholder="Email" name="txt_email" value="<?php echo $obj->email; ?>" ><br>
+    <input type="submit">
+
+</form>
+</div>

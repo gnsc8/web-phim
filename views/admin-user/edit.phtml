@@ -1,0 +1,28 @@
+<div class="container">
+<h1>Chỉnh sửa Account Admin</h1>
+<?php
+echo @$this->view->msg;
+if(isset($this->view->objUR->error))
+{
+    echo $this->view->objUR->error;
+    return;
+}
+$obj = $this->view->objUR;
+?>
+
+
+<form action="" method="post">
+    <input type="text" placeholder="ID" value="<?php echo $obj->id; ?>" readonly ><br>
+    <input type="text" placeholder="Họ tên" name="txt_ho_ten" value="<?php echo $obj->ho_ten; ?>" ><br>
+    <input type="text" placeholder="Địa chỉ Khách hàng" name="txt_dia_chi" value="<?php echo $obj->dia_chi; ?>" ><br>
+    <input type="text" placeholder="Điện thoại" name="txt_dien_thoai" value="<?php echo $obj->dien_thoai; ?>" ><br>
+    <input type="text" placeholder="Email" name="txt_email" value="<?php echo $obj->email; ?>" ><br>
+    <input type="date" placeholder="Ngày sinh" name="txt_ngay_sinh" value="<?php echo $obj->ngay_sinh; ?>" ><br>
+    <select name="txt_gioi_tinh">
+    	<option value="1">Nam</option>
+    	<option value="0">Nữ</option>
+    </select>
+    <input type="submit">
+
+</form>
+</div>

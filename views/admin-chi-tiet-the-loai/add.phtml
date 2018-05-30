@@ -1,0 +1,29 @@
+<div class="container">
+<h1>Thêm mới thể loại</h1>
+<?php
+echo @$this->view->msg;
+?>
+
+<form action="" method="post">
+    <select name="txt_ten_film">
+    	<?php
+               foreach ($this->view->film as $row ){
+                   echo "
+                   <option value='{$row['id']}'>{$row['ten_film']}</option>
+                   ";
+               }
+        ?>
+    </select>
+    <select name="txt_ten_the_loai">
+    	<?php
+               foreach ($this->view->the_loai as $row ){
+                   echo "
+                   <option value='{$row['id']}'>{$row['ten_the_loai']}</option>
+                   ";
+               }
+        ?>
+    </select>
+    <input type="submit" name="submit">
+
+</form>
+</div>

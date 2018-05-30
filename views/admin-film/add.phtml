@@ -1,0 +1,92 @@
+<div class="container">
+<h1>Thêm mới phim</h1>
+<?php
+$myText = (string)@$this->view->msg;
+if (@$_POST['submit'] == 'thêm mới')
+    echo "<script type='text/javascript'>alert('$myText');
+    window.location.replace('?controller=admin-film');</script>";
+?>
+
+<form action="" method="post">
+   <table>
+       <tr>
+           <th>Tên Film</th>
+           <td><input type="text" name="ten_film"></td>
+       </tr>
+        <tr>
+           <th>Tên Film English</th>
+           <td><input type="text" name="ten_film_english"></td>
+       </tr>
+       <tr>
+           <th>Link Ảnh</th>
+           <td><input type="text" name="link_anh"></td>
+       </tr>
+       <tr>
+           <th>Thông Tin Film</th>
+           <td><textarea name="thong_tin_film"></textarea></td>
+       </tr>
+       <tr>
+           <th>Danh Mục</th>
+           <td><select name="danh_muc">
+
+               <?php
+               foreach ($this->view->danh_muc as $row ){
+                   echo "
+                   <option value='{$row['id']}'>{$row['ten_danh_muc']}</option>
+                   ";
+               }
+               ?></select>
+           </td>
+       </tr>
+       <tr>
+           <th>Đạo Diễn</th>
+           <td><select name="dao_dien">
+
+                   <?php
+                   foreach ($this->view->dao_dien as $row ){
+                       echo "
+                   <option value='{$row['id']}'>{$row['ten_dao_dien']}</option>
+                   ";
+                   }
+                   ?></select>
+           </td>
+       </tr>
+       <tr>
+           <th>Thời Lượng</th>
+           <td><input type="text" name="thoi_luong"></td>
+       </tr>
+       <tr>
+           <th>Năm Phát Hành</th>
+           <td><select name="nam_phat_hanh">
+
+                   <?php
+                   foreach ($this->view->nam_phat_hanh as $row ){
+                       echo "
+                   <option value='{$row['id']}'>{$row['nam_phat_hanh']}</option>
+                   ";
+                   }
+                   ?></select>
+           </td>
+       </tr>
+       <tr>
+           <th>Quốc Gia</th>
+           <td><select name="quoc_gia">
+
+                   <?php
+                   foreach ($this->view->quoc_gia as $row ){
+                       echo "
+                   <option value='{$row['id']}'>{$row['ten_quoc_gia']}</option>
+                   ";
+                   }
+                   ?></select>
+           </td>
+       </tr>
+       <tr>
+           <td colspan="2" align="center"><input type="submit" name="submit" value="thêm mới"></td>
+       </tr>
+
+   </table>
+
+
+</form>
+</div>

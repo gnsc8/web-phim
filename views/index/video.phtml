@@ -1,0 +1,75 @@
+<?php
+error_reporting(0);
+$data = array();
+foreach ($this->view->video as $row){
+    $data['link_gd']=$row['link_gd'];
+}
+$url = $data['link_gd'];
+$gid = get_drive_id($url);
+$backup = 'https://drive.google.com/file/d/'.$gid.'/preview';
+$posterimg = PosterImg($backup);
+$linkdown = Drive($url);
+$file = '[{"type": "video/mp4", "label": "HD", "file": "'.$linkdown.'"}]';
+?>
+<link href="<?php echo public_path;?>/skins/thin-green.min.css" rel="stylesheet" type="text/css" />
+<link rel="stylesheet" href="<?php echo public_path;?>/css/video.css">
+<!-- main -->
+<main>
+  <div class="container">
+      <center>
+         <div class="video">
+             <center class="player-wrapper">
+                 <div id="my_video"></div>
+             </center>
+         </div>
+      </center>
+  </div>
+    <div style="background-color: #0bb586;height: 40px;width: 100%;">
+    </div>
+    <div class="container">
+        <div class="" style="width: 100%">
+            <ul class="ul-tap">
+                <?php
+
+                foreach ($this->view->list as $row){
+                    $ten_film = ConvertKhongDau($row['ten_film']);
+                    $ten_film_english = ConvertKhongDau($row['ten_film_english']);
+                    $video_path = video_path;
+                    echo "<li class='list-tap'><a class='a-tap' href='$video_path/$ten_film-$ten_film_english-{$row['id_film']}1/tap-{$row['ten_tap']}/'>Tập {$row['ten_tap']}</a></li>";
+                    }
+                ?>
+            </ul>
+        </div>
+        <?php
+        $phim = thong_tin_phim_path;
+        foreach ($this->view->video as $row){
+            $ten_film = ConvertKhongDau($row['ten_film']);
+            $ten_film_english = ConvertKhongDau($row['ten_film_english']);
+            echo "<div class='info-film'>
+            <h1><a class='phim-video' href='$phim/$ten_film-$ten_film_english-{$row['ten_tap']}'>{$row['ten_film']}</a> - <a class='phim-video' href='$video_path/$ten_film-$ten_film_english-{$row['id_film']}1/tap-{$row['ten_tap']}/'>Tập {$row['ten_tap']}</a></h1>
+            <h2 style='margin-top: 10px;'><a style='font-size: 0.75em;color: white;padding-left: 20px;' href='$phim/$ten_film-$ten_film_english-{$row['ten_tap']}'>{$row['ten_film_english']}</a></h2>
+        </div>";
+        }
+        ?>
+
+    </div>
+
+<script type="text/javascript" src="<?php echo public_path;?>/jwplayer-7.3.6/jwplayer.js"></script>
+<script type="text/javascript">jwplayer.key="Ywok59g9j93GtuSU7+axNzjIp/TBfiK4s0vvYg==";</script>
+<script type="text/javascript">
+  //Note: JW Player 7 now requires a license key. Please make sure to include this on your page if you are self-hosting.
+  //jwplayer.key = "Ywok59g9j93GtuSU7+axNzjIp/TBfiK4s0vvYg==";
+  jwplayer('my_video').setup({
+      playlist: [{
+          "image": "<?php echo $posterimg; ?>",
+          "sources":<?php echo $file?>
+      }],
+      allowfullscreen: true,
+      autostart: true,
+      skin: {
+          name: "thin"
+      },
+  });
+</script>
+
+</main>

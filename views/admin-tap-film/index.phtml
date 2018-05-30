@@ -1,0 +1,65 @@
+
+<section class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-sm-6">
+            
+          </div>
+        </div>
+      </div><!-- /.container-fluid -->
+    </section>
+    <section class="content">
+      <div class="row">
+        <div class="col-12">
+          <div class="card">
+            <div class="card-header">
+              <h3 class="card-title"><?php echo  $this->view->title; ?></h3>
+              <a href="?controller=admin-tap-film&action=add">Thêm mới</a>
+
+            </div>
+            <!-- /.card-header -->
+            <div class="card-body">
+              <table id="example2" class="table table-bordered table-hover">
+                <thead>
+                         <tr>
+                            <th>ID</th>
+                            <th>Tên Film</th>
+                            <th>Tên Tập</th>
+                            <th>Link FB</th>
+                            <th>Link gd</th>
+                            <th>Link OP</th>
+                     
+                        </tr>
+
+
+                </thead>
+                <tbody>
+                   <?php
+                            foreach($this->view->list as $row){
+
+                                $link_edit = "<a href='?controller=admin-tap-film&action=edit&id={$row['id']}'>{$row['ten_film']}</a>";
+                                echo " <tr>
+                                                <td>{$row['id']}</td>
+                                                <td>{$link_edit}</td>
+                                                <td>{$row['ten_tap']}</td>
+                                                <td>{$row['link_fb']}</td>
+                                                <td>{$row['link_gd']}</td>
+                                                <td>{$row['link_op']}</td>
+                                            </tr>";
+                            }
+
+                ?>
+                </tbody>
+                
+              </table>
+            </div>
+            <!-- /.card-body -->
+          </div>
+          <!-- /.card -->
+
+        <!-- /.col -->
+      </div>
+      <!-- /.row -->
+    </section>
+
+

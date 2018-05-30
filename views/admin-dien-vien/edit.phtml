@@ -1,0 +1,18 @@
+<h1>Chỉnh sửa Chức Năng</h1>
+<?php
+echo @$this->view->msg;
+if(isset($this->view->objDV->error))
+{
+    echo $this->view->objDV->error;
+    return;
+}
+$obj = $this->view->objDV;
+?>
+
+
+<form action="" method="post">
+    <input type="text" placeholder=" Tên Diễn Viên" name="txt_ten_dien_vien" value="<?php echo $obj->ten_dien_vien; ?>" ><br>
+    <input type="text" placeholder=" Giới Thiệu" name="txt_gioi_thieu" value="<?php echo $obj->gioi_thieu; ?>" ><br>
+    <input type="submit">
+
+</form>

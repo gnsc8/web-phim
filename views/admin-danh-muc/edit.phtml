@@ -1,0 +1,19 @@
+<div class="container">
+<h1>Chỉnh sửa </h1>
+<?php
+echo @$this->view->msg;
+if(isset($this->view->objDM->error))
+{
+    echo $this->view->objDM->error;
+    return;
+}
+$obj = $this->view->objDM;
+?>
+
+
+<form action="" method="post">
+    <input type="text" placeholder=" Tên Danh Muc" name="ten_danh_muc" value="<?php echo $obj->ten_danh_muc; ?>" ><br>
+    <input type="submit">
+
+</form>
+</div>

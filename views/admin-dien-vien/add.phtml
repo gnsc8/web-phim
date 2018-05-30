@@ -1,0 +1,22 @@
+<h1>Thêm mới danh mục</h1>
+<?php
+echo @$this->view->msg;
+if(isset($this->view->objDV->error))
+{
+    echo $this->view->objDV->error;
+    return;
+}
+?>
+
+<form action="" method="post">
+    <table>
+        <tr>
+            <th>Tên Diễn Viên</th><td><input type="text" name="txt_ten_dien_vien"></td>
+
+        </tr>
+        <tr>
+             <th>Giới Thiệu</th><td><textarea type="text" name="txt_gioi_thieu"></textarea></td>
+        </tr>
+        <tr><td><input type="submit"><td></tr>
+    </table>
+</form>

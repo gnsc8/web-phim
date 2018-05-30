@@ -1,0 +1,69 @@
+
+<section class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-sm-6">
+            
+          </div>
+        </div>
+      </div><!-- /.container-fluid -->
+    </section>
+    <section class="content">
+      <div class="row">
+        <div class="col-12">
+          <div class="card">
+            <div class="card-header">
+              <h3 class="card-title"><?php echo  $this->view->title; ?></h3>
+              <a href="?controller=admin-user&action=add">Thêm mới</a>
+            </div>
+            <!-- /.card-header -->
+            <div class="card-body">
+              <table id="example2" class="table table-bordered table-hover">
+                <thead>
+                         <tr>
+                                <th>ID</th>
+                                <th>Họ Tên</th>
+                                <th>Username</th>
+                                <th>Địa chỉ</th>
+                                <th>Điện thoại</th>
+                                <th>Email</th>
+                                <th>Ngày sinh</th>
+                                <th>Giới tính</th>
+                                <th>Nhóm tài khoản</th>
+                            </tr>
+
+                </thead>
+                <tbody>
+                   <?php
+                        foreach($this->view->list as $row){
+
+                            $link_edit = "<a href='?controller=admin-user&action=edit&id={$row['id']}'>{$row['ho_ten']}</a>";
+                            echo " <tr>
+                                            <td>{$row['id']}</td>
+                                            <td>{$link_edit}</td>
+                                            <td>{$row['username']}</td>
+                                            <td>{$row['dia_chi']}</td>
+                                            <td>{$row['dien_thoai']}</td>
+                                            <td>{$row['email']}</td>
+                                            <td>{$row['ngay_sinh']}</td>
+                                            <td>{$row['gioi_tinh']}</td>
+                                            <td>{$row['ten_nhom']}</td>
+                                        </tr>";
+                        }
+
+                  ?>
+                </tbody>
+                
+              </table>
+            </div>
+            <!-- /.card-body -->
+          </div>
+          <!-- /.card -->
+
+        <!-- /.col -->
+      </div>
+      <!-- /.row -->
+    </section>
+
+
+

@@ -1,0 +1,59 @@
+<div class="container">
+<h1>Chỉnh sửa chi tiết</h1>
+<?php
+$myText = (string)@$this->view->msg;
+// if(isset($this->view->objF->error))
+// {
+//     echo $this->view->objF->error;
+//     return;
+// }
+
+if (@$_POST['submit'] == 'update')
+    echo "<script type='text/javascript'>alert('$myText');
+    window.location.replace('?controller=admin-chi-tiet-the-loai');</script>";
+if(isset($this->view->objCT->error))
+{
+    echo $this->view->objCT->error;
+    return;
+}
+$obj = $this->view->objCT;
+?>
+
+
+<form action="" method="post">
+    <select name="txt_ten_film">
+    	<?php
+               foreach ($this->view->film as $row ){
+				if($row['id']==$obj->id_film)
+
+               	echo "
+                   <option selected value='{$row['id']}'>{$row['ten_film']}</option>
+                   ";
+                   else
+
+                   echo "
+                   <option value='{$row['id']}'>{$row['ten_film']}</option>
+                   ";
+               }
+               ?>
+    </select>
+    <select name="txt_ten_the_loai">
+    	<?php
+               foreach ($this->view->the_loai as $row ){
+				if($row['id']==$obj->id_the_loai)
+
+               	echo "
+                   <option selected value='{$row['id']}'>{$row['ten_the_loai']}</option>
+                   ";
+                   else
+
+                   echo "
+                   <option value='{$row['id']}'>{$row['ten_the_loai']}</option>
+                   ";
+               }
+        ?>
+    </select>
+    <input type="submit" name="submit" value="update">
+
+</form>
+</div>

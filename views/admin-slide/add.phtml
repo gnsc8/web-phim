@@ -1,0 +1,21 @@
+<div class="container">
+<h1>Thêm mới Slide</h1>
+<?php
+echo @$this->view->msg;
+?>
+
+<form action="" method="post">
+	<select name="txt_ten_film">
+		 <?php
+               foreach ($this->view->ten_film as $row ){
+                   echo "
+                   <option value='{$row['id']}'>{$row['ten_film']}</option>
+                   ";
+               }
+               ?>
+	</select><br>
+    <input type="text" placeholder="Link Slide" name="txt_link"><br>
+    <input type="submit" name="submit">
+
+</form>
+</div>

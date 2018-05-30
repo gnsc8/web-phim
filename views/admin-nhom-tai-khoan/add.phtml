@@ -1,0 +1,21 @@
+<div class="container">
+<h1>Thêm mới danh mục</h1>
+<?php
+echo @$this->view->msg;
+if(isset($this->view->objNTK->error))
+{
+    echo $this->view->objNTK->error;
+    return;
+}
+?>
+
+<form action="" method="post">
+    <table>
+        <tr>
+            <th>Tên Nhóm Tài Khoản</th><td><input type="text" placeholder=" Tên Nhóm" name="txt_ten_nhom"></td>
+
+        </tr>
+        <tr><td><input type="submit"><td></tr>
+    </table>
+</form>
+</div>

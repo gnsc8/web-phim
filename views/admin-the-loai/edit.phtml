@@ -1,0 +1,25 @@
+<div class="container">
+<h1>Sửa thể Loại</h1>
+<?php
+echo @$this->view->msg;
+if(isset($this->view->objTL->error))
+{
+    echo $this->view->objTL->error;
+    return;
+}
+$obj = $this->view->objTL;
+?>
+<form action="" method="post">
+    <table>
+        <tr>
+            <th>ID</th>
+            <td><input   readonly value="<?php echo $obj->id; ?>"></td>
+        </tr>
+        <tr>
+            <th>Tên thể loại</th>
+            <td><input type="text" name="ten_the_loai" value="<?php echo $obj->ten_the_loai; ?>"></td>
+        </tr>
+         <tr><td><input type="submit"><td></tr>
+    </table>
+</form>
+</div>

@@ -1,0 +1,152 @@
+<link rel="stylesheet" href="<?php echo public_path;?>/css/thong-tin-phim.css">
+<!-- main -->
+<main>
+  <section>
+      <div class='info-detail'>
+      <?php
+      $video = video_path;
+      foreach ($this->view->objthong_tin_phim as $row) {
+          $_SESSION['id'] = $row['id_film'];
+          //print_r($_SESSION);
+          $ten_film = ConvertKhongDau($row['ten_film']);
+          $ten_film_english = ConvertKhongDau($row['ten_film_english']);
+          $thong_tin = "
+      <div class='container'>
+        <div class='thumb'>
+          <img src='{$row['link_anh']}' alt='HGfilm - {$row['ten_film']} - {$row['ten_film_english']}' width='240'>
+        </div>
+        <div class='content-info-detail'>
+          <div class='title-phim'>
+            <a href=''>
+              <h1>{$row['ten_film']}</h1>
+            </a>
+            <span>
+                <h6>{$row['ten_film_english']}</h6>
+            </span>
+          </div>
+          <div class='xem-phim hidden-xs'>
+          <a href='$video/$ten_film-$ten_film_english-{$row['id_film']}.".$_GET['id_dm']."/tap-{$row['ten_tap']}/'>Xem phim</a>";
+          if (isset($_SESSION['auth'])){
+              $thong_tin .= "<div class='luu-phim hidden-xs'>
+        <a href='".base_url."/my-film/'>Lưu phim</a>
+        </div>";
+          }else{
+              $thong_tin .= "<div class='luu-phim hidden-xs'>
+        <input type=\"button\" onclick=\"alert('Chức năng này cần đăng nhập')\" value=\"Lưu phim\"/>
+        </div>";
+          }
+          $thong_tin .= "</div>
+        
+        
+          <div class='xem-phim-2 visible-xs'>
+            <a href='$video/$ten_film-$ten_film_english-{$row['id_film']}.".$_GET['id_dm']."/tap-{$row['ten_tap']}/'>Xem phim</a>
+          </div>";
+          if (isset($_SESSION['auth'])){
+              $thong_tin .= "<div class='luu-phim-2 visible-xs'>
+            <a href='".base_url."/my-film-{$row['id_film']}/'>Lưu phim</a>
+        </div>";
+          }else{
+              $thong_tin .= "<div class='luu-phim-2 visible-xs'>
+        <input type=\"button\" onclick=\"alert('Chức năng này cần đăng nhập')\" value=\"Lưu phim\"/>
+        </div>";
+          }
+          $thong_tin .="
+          <div class='block'>
+           <div style='padding-bottom: 10px;'> Diễn viên:";
+          }
+          foreach ($this->view->dien_vien as $row)
+              $thong_tin .= "<a class='hightlight'>{$row['ten_dien_vien']}</a>, ";
+            $thong_tin .= "</div>";
+
+          $thong_tin .= "<div style='padding-bottom: 10px;'>Đạo diễn:";
+            foreach ($this->view->objthong_tin_phim as $row)
+                $thong_tin .= " <a class='hightlight'>{$row['ten_dao_dien']}</a>,";
+             $thong_tin .= "</div>";
+      $thong_tin .= "<div style='padding-bottom: 10px;'> Thể loại: ";
+          foreach ($this->view->the_loai as $row){
+              $ten_the_loai = ConvertKhongDau($row['ten_the_loai']);
+              $thong_tin .= "<a class='hightlight' href='the-loai/$ten_the_loai-{$row['id_the_loai']}/page-1/'>{$row['ten_the_loai']}</a>, ";
+          }
+          $thong_tin .= "</div>";
+            foreach ($this->view->objthong_tin_phim as $row) {
+                $ten_quoc_gia = ConvertKhongDau($row['ten_quoc_gia']);
+          $thong_tin .= "<div style='padding-bottom: 10px;'>Quốc gia: <a href='quoc-gia/$ten_quoc_gia-{$row['id_quoc_gia']}/page-1/' class='hightlight'>{$row['ten_quoc_gia']}</a></div>
+            <div style='padding-bottom: 10px;'>Thời lượng: <span class='hightlight'>{$row['thoi_luong']}</span></div>
+            <div style='padding-bottom: 10px;'>Năm sản xuất: <span class='hightlight'>{$row['nam_phat_hanh']}</span></div>
+          </div>
+          </div>
+        </div>
+        </div>
+        <div class='container'>
+      <div class='box-content'>
+        <div class='block keyword'>
+            <h2>Giới thiệu phim {$row['ten_film']} :</h2>
+        </div>
+          <div class='content-film'>
+          {$row['thong_tin_film']}
+        </div>
+        </div>
+        </div>
+    ";
+      }
+      echo $thong_tin;
+      ?>
+
+      </div>
+    <div class="comment-fb">
+      <div class="container">
+        <div class="">
+          <!-- phần fanpage fb -->
+        </div>
+      </div>
+    </div>
+    <div class="comment-fb">
+      <div class="container">
+        <div class="">
+          <!-- phần comment -->
+        </div>
+      </div>
+    </div>
+    <div class="relate">
+      <section class="movie">
+        <div class="container">
+          <div class="wrap-item">
+            <div class="title-section">
+              <span>Phim Liên Quan</span>
+            </div>
+            <div class="mv-group" style="">
+
+                <?php
+                $link_public = public_path;
+                $phim = thong_tin_phim_path;
+                $base_url = base_url;
+                foreach ($this->view->relate as $row){
+                    $ten_film = ConvertKhongDau($row['ten_film']);
+                    $ten_film_english = ConvertKhongDau($row['ten_film_english']);
+                    echo "<div class='mv-item'>
+                <div class='mv-item-iner'>
+                    <a href='$phim/$ten_film-$ten_film_english-{$row['id_film']}.".$_GET['id_dm']."/tap-{$row['ten_tap']}/' class='img-item'>
+                        <div class='mv-item-img' alt='{$row['ten_film']}' title='{$row['ten_film']}' style='background: url({$row['link_anh']}) no-repeat scroll center top / cover;'>
+                        </div>
+                        <i class='btn-play'>
+                            <img src='$link_public/images/btn-play.png' alt='hgfilm - {$row['ten_film']} - {$row['ten_film_english']}' width='50'>
+                        </i>
+                    </a>
+                    <span class='label'>Tập {$row['ten_tap']}</span>
+                </div>
+                <div class='mv-item-info'>
+                    <a href='$phim/$ten_film-$ten_film_english-{$row['id_film']}.".$_GET['id_dm']."/tap-{$row['ten_tap']}/' class='mv-title'>
+                    {$row['ten_film']}
+                    </a>
+                </div>
+            </div>";}
+                ?>
+              
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+  </section>
+</main>
+<!-- end main -->

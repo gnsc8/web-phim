@@ -1,0 +1,24 @@
+<div class="container">
+<h1>Thêm mới banner quảng cáo</h1>
+<?php
+echo @$this->view->msg;
+if(isset($this->view->objTL->error))
+{
+    echo $this->view->objTL->error;
+    return;
+}
+?>
+
+<form action="" method="post">
+    <table>
+        <tr>
+            <th>Banner</th><td><input type="text" name="txt_banner" placeholder="Banner"></td>
+        </tr>
+        <tr>
+            <th>Link Quảng Cáo</th><td><input type="text" name="txt_link" placeholder="Link"></td>
+        </tr>
+
+        <tr><td><input type="submit" name="submit"><td></tr>
+    </table>
+</form>
+</div>

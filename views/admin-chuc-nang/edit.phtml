@@ -1,0 +1,20 @@
+<div class="container">
+<h1>Chỉnh sửa Chức Năng</h1>
+<?php
+echo @$this->view->msg;
+if(isset($this->view->objCN->error))
+{
+    echo $this->view->objCN->error;
+    return;
+}
+$obj = $this->view->objCN;
+?>
+
+
+<form action="" method="post">
+    <input type="text" placeholder=" Tên Chức Năng" name="txt_ten_chuc_nang" value="<?php echo $obj->ten_chuc_nang; ?>" ><br>
+    <input type="text" placeholder=" Link" name="txt_link" value="<?php echo $obj->link; ?>" >
+    <input type="submit">
+
+</form>
+</div>

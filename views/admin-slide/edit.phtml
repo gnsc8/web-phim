@@ -1,0 +1,45 @@
+<div class="container">
+<h1>Chỉnh sửa Slide</h1>
+<?php
+$myText = (string)@$this->view->msg;
+// if(isset($this->view->objF->error))
+// {
+//     echo $this->view->objF->error;
+//     return;
+// }
+
+if (@$_POST['submit'] == 'update')
+    echo "<script type='text/javascript'>alert('$myText');
+    window.location.replace('?controller=admin-slide');</script>";
+  
+if(isset($this->view->objSL->error))
+{
+    echo $this->view->objSL->error;
+    return;
+}
+$obj = $this->view->objSL;
+?>
+
+
+<form action="" method="post">
+	<select name="txt_ten_film">
+		<?php
+               foreach ($this->view->ten_film as $row ){
+				if($row['id']==$obj->id_film)
+
+               	echo "
+                   <option selected value='{$row['id']}'>{$row['ten_film']}</option>
+                   ";
+                   else
+
+                   echo "
+                   <option value='{$row['id']}'>{$row['ten_film']}</option>
+                   ";
+               }
+               ?>
+	</select>
+    <input type="text" placeholder="Link" name="txt_link" value="<?php echo $obj['0']['link_slide'];?>" ><br>
+    <input type="submit" name="submit" value="update">
+
+</form>
+</div>

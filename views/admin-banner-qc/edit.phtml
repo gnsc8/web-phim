@@ -1,0 +1,32 @@
+<div class="container">
+<?php
+$myText = (string)@$this->view->msg;
+// if(isset($this->view->objF->error))
+// {
+//     echo $this->view->objF->error;
+//     return;
+// }
+
+if (@$_POST['submit'] == 'update')
+    echo "<script type='text/javascript'>alert('$myText');
+    window.location.replace('?controller=admin-banner-qc');</script>";
+if(isset($this->view->objQC->error))
+{
+    echo $this->view->objQC->error;
+    return;
+}
+$obj = $this->view->objQC;
+?>
+<form action="" method="post">
+    <table>
+        <tr>
+            <th>Banner</th><td><input type="text" name="txt_banner" placeholder="Banner" value="<?php echo $obj->banner; ?>"></td>
+        </tr>
+        <tr>
+            <th>Link Quảng Cáo</th><td><input type="text" name="txt_link" placeholder="Link" value="<?php echo $obj->link_qc; ?>"></td>
+        </tr>
+
+        <tr><td><input type="submit" name="submit" value="update"><td></tr>
+    </table>
+</form>
+</div>

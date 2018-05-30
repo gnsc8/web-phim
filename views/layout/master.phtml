@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <link rel="shortcut icon" type="image/png" href="<?php echo public_path;?>/images/2.png"/>
+  <title>Xem Phim Online</title>
+  <!-- Latest compiled and minified CSS & JS -->
+  <link rel="stylesheet" href="<?php echo public_path;?>/bootstrap/css/bootstrap.min.css">
+  <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="<?php echo public_path;?>/css/header-footer.css">
+  <link rel="stylesheet" href="<?php echo public_path;?>/css/main.css">
+  <script src="<?php echo public_path;?>/js/jquery.min.js"></script>
+  <script src="<?php echo public_path;?>/bootstrap/js/bootstrap.min.js"></script>
+<!-- js menu -->
+<script type="text/javascript">
+  $(document).ready(function(){
+    $(".dropdown").hover(            
+      function() {
+        $('.dropdown-menu', this).not('.in .dropdown-menu').stop(true,true).slideDown("400");
+        $(this).toggleClass('open');        
+      },
+      function() {
+        $('.dropdown-menu', this).not('.in .dropdown-menu').stop(true,true).slideUp("400");
+        $(this).toggleClass('open');       
+      }
+      );
+  });
+</script>
+</head>
+<body>
+  <header style="height:50px;width: 100%;background: #fff;">
+ <div class="container">    
+  <nav class="navbar navbar-default" style="position: fixed; z-index: 9999;">
+    <div class="container">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse-2">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="<?php echo base_url;?>">
+          <img class="logo2" src="<?php echo public_path;?>/images/logo2.png" alt="hgfilm - xem phim online miễn phí">
+        </a>
+      </div>
+      <div class="collapse navbar-collapse" id="navbar-collapse-2">
+        <ul class="nav navbar-nav navbar-right">
+          <li><a class="hover" href="<?php echo base_url;?>">Home</a></li>
+          <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Thể loại</a>
+            <ul class="dropdown-menu multi-columns columns-3" role="menu">
+              <div class="row">
+                <div class="col-sm-4">
+                  <ul class="multi-column-dropdown">
+                      <?php $i = 1;
+                      $base_url = base_url;
+                      foreach ($this->view->the_loai_header as $row){
+                            $ten_the_loai = ConvertKhongDau($row['ten_the_loai']);
+                          if ($i == 9 or $i == 16)
+                          {
+                              echo " </ul>
+                                    </div>
+                                    <div class='col-sm-4'>
+                                      <ul class='multi-column-dropdown'>";
+                              //continue;
+                          }
+                          echo "<li><a href='$base_url/the-loai/$ten_the_loai-{$row['id']}/page-1/'>{$row['ten_the_loai']}</a></li>";
+                          $i++;
+                      }
+
+                      ?>
+              </div>
+            </ul>
+          </li>
+          <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Quốc gia</a>
+            <ul class="dropdown-menu multi-columns columns-3" role="menu">
+                  <div class="row">
+                      <div class="col-sm-4">
+                          <ul class="multi-column-dropdown">
+                              <?php $i = 1;
+                              $base_url = base_url;
+                              foreach ($this->view->quoc_gia_header as $row){
+                                  $ten_quoc_gia = ConvertKhongDau($row['ten_quoc_gia']);
+                                  if ($i == 6 or $i == 11)
+                                  {
+                                      echo " </ul>
+                                    </div>
+                                    <div class='col-sm-4'>
+                                      <ul class='multi-column-dropdown'>";
+                                      //continue;
+                                  }
+                                  echo "<li><a href='$base_url/quoc-gia/$ten_quoc_gia-{$row['id']}/page-1/'>{$row['ten_quoc_gia']}</a></li>";
+                                  $i++;
+                              }
+
+                              ?>
+                      </div>
+              </ul>
+          </li>
+          <li><a href="<?php echo base_url;?>/phim-le/">Phim lẻ</a></li>
+          <li><a href="<?php echo base_url;?>/phim-bo/">Phim bộ</a></li>
+          <li><a href="https://congtruyen.org/">Cổng truyện</a></li>
+          <li><a href="<?php echo base_url;?>/phim-hoat-hinh-anime/">Hoạt Hình</a></li>
+
+
+              <?php
+              if(isset($_SESSION['auth'])){
+                  // đã đăng nhập\
+                  $userInfo = $_SESSION['auth'];
+                  //<li style=' padding-top: 14px;color: black;'> $userInfo->username<a style='color: black;font-size: 16px;font-weight: normal;text-transform: none;' href='?action=logout'>logout</a> </li>
+                  echo "
+            <li class='dropdown'>
+            <a style='color:black;font-weight: normal;text-transform: none;.navbar-default .navbar-nav>li>a:hover{background-color: #fff;}.multi-column-dropdown li a:hover, .multi-column-dropdown li a:focus{background-color: none}' href='#' class='dropdown-toggle' data-toggle='dropdown' role='button' aria-expanded='false'>$userInfo->username</a>
+            <ul style='min-width: 200px;' class='dropdown-menu multi-columns columns-3' role='menu'>
+                  <div class='row'>
+                      <div style='padding-right: 0;padding-left: 0;' class='col-sm-12'>
+                          <ul class='multi-column-dropdown'>
+                               <li><a style='.multi-column-dropdown li a:hover{background-color: #fff}' href='".base_url."/my-film/'>My Film</a></li>
+                               <li><a style='.multi-column-dropdown li a:hover{background-color: #fff}' href='".base_url."/logout/'>Logout</a></li>
+                          </ul>
+                      </div>
+                      </div>
+              </ul>
+               </li>";
+              }else
+                  echo "<li><a class='btn btn-default btn-outline btn-circle collapsed'  data-toggle='collapse' href='#nav-collapse2' aria-expanded='false' aria-controls='nav-collapse2'>Sign in</a></li>";
+
+              ?>
+            
+
+          <li>
+            <a class="btn btn-default btn-outline btn-circle collapsed"  data-toggle="collapse" href="#nav-collapse3" aria-expanded="false" aria-controls="nav-collapse3">Search</a>
+          </li>
+        </ul>
+
+        <div class="collapse nav navbar-nav nav-collapse slide-down" id="nav-collapse2">
+          <form class="navbar-form navbar-right form-inline" role="form" action="" method="post">
+            <div class="form-group">
+              <label class="sr-only" for="Email">Username</label>
+              <input type="text" class="form-control" name="username-login" id="Email" placeholder="Email" autofocus  />
+            </div>
+            <div class="form-group">
+              <label class="sr-only" for="Password">Password</label>
+              <input type="password" class="form-control" name="password-login" id="Password" placeholder="Password" />
+            </div>
+            <button type="submit" class="btn btn-success" name="submit-login">Login</button>
+            <button type="submit" formaction="<?php echo base_url;?>/register/" class="btn btn-success">Sign Up</button>
+          </form>
+        </div>
+
+        <div class="collapse nav navbar-nav nav-collapse slide-down" id="nav-collapse3">
+          <form class="navbar-form navbar-right" role="search">
+            <div class="form-group">
+              <input type="text" class="form-control" placeholder="Search" />
+            </div>
+            <button type="submit" class="btn btn-danger"><span class="fa fa-search" aria-hidden="true"></span></button>
+          </form>
+        </div>
+
+      </div>
+    </div>
+  </nav>
+</div>
+</header>
+<!-- end header -->
+<!-- main -->
+<?php
+$this->showContent(); 
+?>
+<!-- end main -->
+<!-- footer -->
+<footer>
+
+    <div class="container">
+        <div class="inner text-center">
+            <a href="/" class="logo-footer"><img src="<?php echo public_path;?>/images/logo2.png" width="150" title="HGFilm - Website xem phim online trực tuyến miễn phí" alt="HGFilm - Website xem phim online trực tuyến miễn phí"></a>
+            <ul class="list-inline">
+                
+                <li><a href="">Điều khoản sử dụng</a></li>
+                <li><a href="">Chính sách riêng tư</a></li>
+                <li><a href="">Nguyên tắc Cộng Đồng</a></li>
+                <li><a href="">Liên hệ Quảng Cáo</a></li>
+
+
+            </ul>
+            <p>Đồ án của học viên : Nguyễn Trường Giang & Đào Minh Hiếu</p>
+        </div>
+    </div>
+</footer>
+<!-- end footer -->
+</body>
+</html>

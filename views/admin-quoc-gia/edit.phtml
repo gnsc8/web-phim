@@ -1,0 +1,19 @@
+<div class="container">
+<h1>Chỉnh sửa quốc gia</h1>
+<?php
+echo @$this->view->msg;
+if(isset($this->view->objQG->error))
+{
+    echo $this->view->objQG->error;
+    return;
+}
+$obj = $this->view->objQG;
+?>
+
+
+<form action="" method="post">
+    <input type="text" placeholder=" Tên quốc gia" name="txt_ten_quoc_gia" value="<?php echo $obj->ten_quoc_gia; ?>" ><br>
+    <input type="submit">
+
+</form>
+</div>

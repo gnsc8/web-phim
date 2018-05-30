@@ -1,0 +1,20 @@
+<div class="container">
+<h1>Thêm mới thể Loại</h1>
+<?php
+echo @$this->view->msg;
+if(isset($this->view->objTL->error))
+{
+    echo $this->view->objTL->error;
+    return;
+}
+?>
+
+<form action="" method="post">
+    <table>
+        <tr>
+            <th>Tên thể loại</th><td><input type="text" name="ten_the_loai" placeholder="Tên thể loại"></td>
+        </tr>
+        <tr><td><input type="submit"><td></tr>
+    </table>
+</form>
+</div>

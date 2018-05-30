@@ -1,0 +1,83 @@
+ <!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <link rel="shortcut icon" type="image/png" href="<?php echo public_path;?>/images/2.png"/>
+  <title>Xem Phim Online</title>
+  <!-- Latest compiled and minified CSS & JS -->
+  <link rel="stylesheet" href="<?php echo public_path;?>/bootstrap/css/bootstrap.min.css">
+  <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="<?php echo public_path;?>/css/header-footer.css">
+  <link rel="stylesheet" href="<?php echo public_path;?>/css/main.css">
+  <link rel="stylesheet" href="<?php echo public_path;?>/css/login-admin.css">
+  <script src="<?php echo public_path;?>/js/jquery.min.js"></script>
+  <script src="<?php echo public_path;?>/js/js-login.js"></script>
+  <script src="<?php echo public_path;?>/bootstrap/js/bootstrap.min.js"></script>
+  
+<!-- js menu -->
+<script type="text/javascript">
+  $(document).ready(function(){
+    $(".dropdown").hover(            
+      function() {
+        $('.dropdown-menu', this).not('.in .dropdown-menu').stop(true,true).slideDown("400");
+        $(this).toggleClass('open');        
+      },
+      function() {
+        $('.dropdown-menu', this).not('.in .dropdown-menu').stop(true,true).slideUp("400");
+        $(this).toggleClass('open');       
+      }
+      );
+  });
+</script>
+<style type="text/css">
+  footer{
+    margin-top:794px;
+  }
+
+</style>
+</head>
+<body>
+
+  <?php
+    if(isset($this->view->msg))
+        echo "<p>".$this->view->msg."</p>";
+    ?>
+      <div class="container">
+        <div id="login-box">
+          <div class="logo">
+            <img src="http://lorempixel.com/output/people-q-c-100-100-1.jpg" class="img img-responsive img-circle center-block"/>
+            <h1 class="logo-caption"><span class="tweak">A</span>dmin</h1>
+          </div><!-- /.logo -->
+          <form action="" method="post">
+          <div class="controls">
+            <input type="text" name="txt_username" placeholder="Username" class="form-control" />
+            <input type="password" name="txt_pas" placeholder="Password" class="form-control" />
+            <button type="submit" name="submit" class="btn btn-default btn-block btn-custom">Login</button>
+          </div><!-- /.controls -->
+
+        </form>
+        </div><!-- /#login-box -->
+</div><!-- /.container -->
+<div id="particles-js"></div>
+<div class="clr"></div>
+<footer>
+
+    <div class="container">
+        <div class="inner text-center">
+            <a href="/" class="logo-footer"><img src="<?php echo public_path;?>/images/logo2.png" width="150" title="HGFilm - Website xem phim online trực tuyến miễn phí" alt="HGFilm - Website xem phim online trực tuyến miễn phí"></a>
+            <ul class="list-inline">
+                
+                <li><a href="">Điều khoản sử dụng</a></li>
+                <li><a href="">Chính sách riêng tư</a></li>
+                <li><a href="">Nguyên tắc Cộng Đồng</a></li>
+                <li><a href="">Liên hệ Quảng Cáo</a></li>
+
+
+            </ul>
+            <p>Đồ án của học viên : Nguyễn Trường Giang & Đào Minh Hiếu</p>
+        </div>
+    </div>
+</footer>
+<!-- end footer -->
+</body>
+</html>

@@ -1,0 +1,20 @@
+<div class="container">
+<h1>Thêm mới danh mục</h1>
+<?php
+echo @$this->view->msg;
+if(isset($this->view->objDM->error))
+{
+    echo $this->view->objDM->error;
+    return;
+}
+?>
+
+<form action="" method="post">
+    <table>
+        <tr>
+            <th>Tên Danh Mục</th><td><input type="text" name="ten_danh_muc"></td>
+        </tr>
+        <tr><td><input type="submit"><td></tr>
+    </table>
+</form>
+</div>

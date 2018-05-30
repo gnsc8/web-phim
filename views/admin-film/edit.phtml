@@ -1,0 +1,128 @@
+<div class="container">
+<h1>Sửa Thông tin phim</h1>
+<?php
+$myText = (string)@$this->view->msg;
+// if(isset($this->view->objF->error))
+// {
+//     echo $this->view->objF->error;
+//     return;
+// }
+$obj = $this->view->objF;
+
+if (@$_POST['submit'] == 'update')
+    echo "<script type='text/javascript'>alert('$myText');
+    window.location.replace('?controller=admin-film');</script>";
+  
+?>
+
+<form action="" method="post">
+   <table>
+       <tr>
+           <th>Tên Film</th>
+           <td><input type="text" name="ten_film" value="<?php echo $obj->ten_film; ?>"></td>
+       </tr>
+        <tr>
+           <th>Tên Film English</th>
+           <td><input type="text" name="ten_film_english" value="<?php echo $obj->ten_film_english; ?>"></td>
+       </tr>
+       <tr>
+           <th>Link Ảnh</th>
+           <td><input type="text" name="link_anh" value="<?php echo $obj->link_anh; ?>"></td>
+       </tr>
+       <tr>
+           <th>Thông Tin Film</th>
+           <td><textarea name="thong_tin_film" value="<?php echo $obj->thong_tin_film; ?>"></textarea></td>
+       </tr>
+       <tr>
+           <th>Danh Mục</th>
+           <td><select name="danh_muc" >
+
+               <?php
+               foreach ($this->view->danh_muc as $row ){
+				if($row['id']==$obj->id_danh_muc)
+
+               	echo "
+                   <option selected value='{$row['id']}'>{$row['ten_danh_muc']}</option>
+                   ";
+                   else
+
+                   echo "
+                   <option value='{$row['id']}'>{$row['ten_danh_muc']}</option>
+                   ";
+               }
+               ?></select>
+           </td>
+       </tr>
+       <tr>
+           <th>Đạo Diễn</th>
+           <td><select name="dao_dien" >
+
+                   <?php
+                   foreach ($this->view->dao_dien as $row ){
+                       if($row['id']==$obj->id_dao_dien)
+
+               	echo "
+                   <option selected value='{$row['id']}'>{$row['ten_dao_dien']}</option>
+                   ";
+                   else
+
+                   echo "
+                   <option value='{$row['id']}'>{$row['ten_dao_dien']}</option>
+                   ";
+                   }
+                   ?></select>
+           </td>
+       </tr>
+       <tr>
+           <th>Thời Lượng</th>
+           <td><input type="text" name="thoi_luong" value="<?php echo $obj->thoi_luong; ?>"></td>
+       </tr>
+       <tr>
+           <th>Năm Phát Hành</th>
+           <td><select name="nam_phat_hanh">
+
+                   <?php
+                   foreach ($this->view->nam_phat_hanh as $row ){
+                       if($row['id']==$obj->id_nam_phat_hanh)
+
+               	echo "
+                   <option selected value='{$row['id']}'>{$row['nam_phat_hanh']}</option>
+                   ";
+                   else
+
+                   echo "
+                   <option value='{$row['id']}'>{$row['nam_phat_hanh']}</option>
+                   ";
+                   }
+                   ?></select>
+           </td>
+       </tr>
+       <tr>
+           <th>Quốc Gia</th>
+           <td><select name="quoc_gia">
+
+                   <?php
+                   foreach ($this->view->quoc_gia as $row ){
+                      if($row['id']==$obj->id_quoc_gia)
+
+               	echo "
+                   <option selected value='{$row['id']}'>{$row['ten_quoc_gia']}</option>
+                   ";
+                   else
+
+                   echo "
+                   <option value='{$row['id']}'>{$row['ten_quoc_gia']}</option>
+                   ";
+               }
+                   ?></select>
+           </td>
+       </tr>
+       <tr>
+           <td colspan="2" align="center"><input type="submit" name="submit" value="update"></td>
+       </tr>
+
+   </table>
+
+
+</form>
+</div>

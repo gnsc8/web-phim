@@ -1,0 +1,66 @@
+
+<section class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-sm-6">
+            
+          </div>
+        </div>
+      </div><!-- /.container-fluid -->
+    </section>
+    <section class="content">
+      <div class="row">
+        <div class="col-12">
+          <div class="card">
+            <div class="card-header">
+              <h3 class="card-title"><?php echo  $this->view->title; ?></h3>
+              <a href="?controller=admin-dien-vien&action=add">Thêm mới</a>
+            </div>
+            <!-- /.card-header -->
+             <form action="" method="get">
+                <input type="hidden" name="controller" value ="admin-dien-vien">
+                <input type="text" name="search_hoten" placeholder="Nhập Tên Diễn Viên Cần Tìm">
+                <input type="submit" value="search">
+                <a href="?controller=admin-dien-vien">Clear</a>
+             </form>
+            <div class="card-body">
+              <table id="example2" class="table table-bordered table-hover">
+                <thead>
+                     <tr>
+                            <th>ID</th>
+                            <th>Tên Danh Mục</th>
+                            <th>Giới Thiệu</th>
+                     
+                        </tr>
+
+                </thead>
+                <tbody>
+                   <?php
+                        foreach($this->view->list as $row){
+
+                            $link_edit = "<a href='?controller=admin-dien-vien&action=edit&id={$row['id']}'>{$row['ten_dien_vien']}</a>";
+                            echo " <tr>
+                                            <td>{$row['id']}</td>
+                                            <td>{$link_edit}</td>
+                                            <td>{$row['gioi_thieu']}</td>
+                                        </tr>";
+                        }
+
+                    ?>
+                </tbody>
+                
+              </table>
+            </div>
+            <!-- /.card-body -->
+          </div>
+          <!-- /.card -->
+
+        <!-- /.col -->
+      </div>
+      <!-- /.row -->
+    </section>
+
+
+
+
+

@@ -1,0 +1,20 @@
+<div class="container">
+<h1>Chỉnh sửa đạo diễn</h1>
+<?php
+echo @$this->view->msg;
+if(isset($this->view->objDD->error))
+{
+    echo $this->view->objDD->error;
+    return;
+}
+$obj = $this->view->objDD;
+?>
+
+
+<form action="" method="post">
+    <input type="text" placeholder=" Tên Đạo Diễn" name="txt_ten_dao_dien" value="<?php echo $obj->ten_dao_dien; ?>" ><br>
+    <input type="text" placeholder=" Giới Thiệu" name="txt_gioi_thieu" value="<?php echo $obj->gioi_thieu; ?>" ><br>
+    <input type="submit">
+
+</form>
+</div>

@@ -1,0 +1,212 @@
+<?php
+$data=$this->view->list;
+
+?>
+<section class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-sm-6">
+            
+          </div>
+        </div>
+      </div><!-- /.container-fluid -->
+    </section>
+    <section class="content">
+      <div class="row">
+        <div class="col-12">
+          <div class="card">
+            <div class="card-header">
+              <h3 class="card-title"><?php echo  $this->view->title; ?></h3>
+              <a href="?controller=admin-film&action=add">Thêm mới</a>
+            </div>
+            <!-- /.card-header -->
+            <form action="" method="get">
+                <input type="hidden" name="controller" value ="admin-film">
+                <input type="text" name="search_ten_film" placeholder="Nhập Tên Film Cần Tìm">
+               <!--  <select name="search_danh_muc" >
+                    <option value="">--Tên Danh Mục--</option>
+
+                       <?php
+
+                       foreach ($this->view->danh_muc as $row ){
+                        if(isset($_GET['search_danh_muc'])&&$row['id']==$_GET['search_danh_muc'])
+
+                        echo "
+                           <option selected value='{$row['id']}'>{$row['ten_danh_muc']}</option>
+                           ";
+                           else
+
+                           echo "
+                           <option value='{$row['id']}'>{$row['ten_danh_muc']}</option>
+                           ";
+                       }
+                        ?>
+                   
+               </select> -->
+                <select name="search_nam_phat_hanh">
+                     <option value="">--Năm Phát Hành--</option>
+                   <?php
+                   foreach ($this->view->nam_phat_hanh as $row ){
+                       if(isset($_GET['search_nam_phat_hanh'])&&$row['id']==$_GET['search_nam_phat_hanh'])
+
+                echo "
+                   <option selected value='{$row['id']}'>{$row['nam_phat_hanh']}</option>
+                   ";
+                   else
+
+                   echo "
+                   <option value='{$row['id']}'>{$row['nam_phat_hanh']}</option>
+                   ";
+                   }
+                   ?></select>
+                <select name="search_quoc_gia">
+                <option value="">-- Chọn Quốc Gia --</option>
+                <?php
+                // nếu không có lỗi thì in ra danh sách
+                    foreach ($this->view->quoc_gia as $row ){
+                        if(isset($_GET['search_quoc_gia'])&&$row['id']==$_GET['search_quoc_gia'])
+
+                echo "
+                   <option selected value='{$row['id']}'>{$row['ten_quoc_gia']}</option>
+                   ";
+                   else
+
+                   echo "
+                   <option value='{$row['id']}'>{$row['ten_quoc_gia']}</option>
+                   ";
+                   }
+
+            ?>
+        </select>
+
+        <input type="submit" value="search">
+        <a href="?controller=admin-film">Clear</a>
+    </form>
+            <div class="card-body">
+                <form action="" method="post" onSubmit="return confirmAction()">
+            <div style="overflow-x:auto;">
+              <table id="example2" class="table table-bordered table-hover">
+                <thead>
+                    <tr>
+                            <th>ID</th>
+                            <th>Tên Film</th>
+                            <th>Tên Film English</th>
+                            <th>Link Ảnh</th>
+                            <th>Thông Tin Film</th>
+                        <!--     <th>Danh Mục</th> -->
+                            <th>Đạo Diễn</th>
+                            <th>Thời Lượng</th>
+                            <th>Năm Phát Hành</th>
+                            <th>Quốc Gia</th>
+                            <th>View</th>
+                            <th>Tài Khoản Thêm </th>
+                            <th>Ngày Thêm</th>
+                            <th>Ngày Cập Nhật</th>
+                            <th>Thao Tác</th>
+
+
+                        </tr>
+                </thead>
+                <tbody>
+                    <?php
+                      if (isset($data['list'])) 
+                            foreach($data['list'] as $row){
+                             
+                                $style= "style='overflow: hidden;
+    display: block;
+    height: 97px;
+    width: 163px;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    border-top: none;'";
+                                $link_edit = "<a href='?controller=admin-film&action=edit&id=$row->id'>$row->ten_film</a>";
+                                $link_delete = "<a href='?controller=admin-film&action=delete&id=$row->id'onclick='return confirmAction()'>Xóa</a>";
+                                echo " <tr style='overflow:hidden;'>     <td>$row->id</td>
+                                                <td>$link_edit</td>
+                                                <td>$row->ten_film_english</td>
+                                                <td >$row->link_anh</td>
+                                                <td $style >$row->thong_tin_film</td>
+                                               
+                                                <td>$row->ten_dao_dien</td>
+                                                <td>$row->thoi_luong</td>
+                                                <td>$row->nam_phat_hanh</td>
+                                                <td>$row->ten_quoc_gia</td>
+                                                <td>$row->view</td>
+                                                <td>$row->ho_ten</td>
+                                                <td>$row->ngay_them</td>
+                                                <td>$row->ngay_cap_nhat</td>
+                                                <td>$link_delete</td>
+                                                
+                                            </tr>";
+                                          
+                            }
+
+                            ?>
+                </tbody>
+                
+              </table>
+                
+            </div>
+            <div class="pagination">
+    <?php
+    //hiển thị phần phân trang
+    $base_url = base_url;
+    $nam_phat_hanh="";
+    $ten_film="";
+    $quoc_gia="";
+    if (isset($params['search_ten_film']) && strlen($params['search_ten_film']) > 0) {
+            $ten_film = "&search_ten_film = ";
+            $ten_film .= $params['search_ten_film'];
+        }
+    if (isset($params['search_quoc_gia']) && strlen($params['search_quoc_gia']) > 0) {
+            $quoc_gia = "&search_nam_phat_hanh = ";
+            $quoc_gia .= $params['search_quoc_gia'];
+        }
+    if (isset($params['search_nam_phat_hanh']) && strlen($params['search_nam_phat_hanh']) > 0) {
+            $nam_phat_hanh = "&search_quoc_gia = ";
+            $nam_phat_hanh .= $params['search_nam_phat_hanh'];
+        }
+    $url_admin_film = "?controller=admin-film$ten_film$nam_phat_hanh$quoc_gia";
+    // nếu current_page > 1 và total_page > 1 mới hiển thị nút prev
+    if ($this->view->current_page > 1 && $this->view->total_page > 1){
+        echo '<a class="phan_trang" href="'.$base_url.''.$url_admin_film.'&page='.($this->view->current_page-1).'">Prev</a> | ';
+    }
+
+    // Lặp khoảng giữa
+    for ($i = 1; $i <= $this->view->total_page; $i++){
+        // Nếu là trang hiện tại thì hiển thị thẻ span
+        // ngược lại hiển thị thẻ a
+        if ($i == $this->view->current_page){
+            echo '<span>'.$i.'</span> | ';
+        }
+        else{
+            echo '<a href="'.$url_admin_film.'&page='.$i.'">'.$i.'</a> | ';
+        }
+    }
+
+    // nếu current_page < $this->view->total_page và total_page > 1 mới hiển thị nút prev
+    if ($this->view->current_page < $this->view->total_page && $this->view->total_page > 1){
+        echo '<a href="'.$url_admin_film.'&page='.($this->view->current_page+1).'">Next</a> | ';
+    }
+    ?>
+</div>
+                </form>
+            </div>
+            <!-- /.card-body -->
+          </div>
+          <!-- /.card -->
+
+        <!-- /.col -->
+      </div>
+      <!-- /.row -->
+    </section>
+
+<SCRIPT LANGUAGE="JavaScript">
+      function confirmAction() {
+        return confirm("Bạn có chắc chắn về sự lựa chọn của mình !!!")
+      }
+        // if (confirm){
+        //
+        // }
+</SCRIPT>
+
