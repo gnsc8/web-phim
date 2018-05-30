@@ -556,15 +556,32 @@ class IndexController extends Controller
 
          $params = array();
         if(isset($_GET['search_ten_film'])){
-            //1. kiểm tra hợp lệ của chuỗi search_username Việc này tự làm
-
-            //2. nếu kiểm tra ok thì gán vào mảng
             $params['search_ten_film'] = $_GET['search_ten_film'];
         }
 
         $objModel = new SearchFilmModel();
-        $this->view->search = $objModel->searchList($params);
+        $this->view->total_records = $objModel->count($params);
+        //tìm limit và current_page
+        $this->view->current_page = isset($_GET['page']) ? $_GET['page'] : 1;
+        //số bản ghi trên 1 trang
+        $limit = 32;
 
+        // tổng số trang
+        $this->view->total_page = ceil($this->view->total_records / $limit);
+
+        // Giới hạn current_page trong khoảng 1 đến total_page
+        if ($this->view->current_page > $this->view->total_page){
+            $this->view->current_page = $this->view->total_page;
+        }
+        else if ($this->view->current_page < 1){
+            $this->view->current_page = 1;
+        }
+
+        // Tìm Start
+        $start = ($this->view->current_page - 1) * $limit;
+
+        $this->view->search = $objModel->searchList($params,$limit,$start);
+        print_r($this->view->search);
     }
 
 
