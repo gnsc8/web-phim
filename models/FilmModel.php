@@ -431,7 +431,6 @@ limit 8";
             $data[] = $row;
         }
         mysqli_free_result($res);
-        print_r($data);
         return $data;
     }
 }
