@@ -418,7 +418,6 @@ limit 8";
 
     }
     public function getSlide(){
-        $sql = "SELECT ten_film,ten_film_english,tb_slide.id_film,ten_tap,link_slide FROM tb_slide,tb_film,tb_tap_film WHERE tb_film.id = tb_slide.id_film AND tb_film.id = tb_tap_film.id_film ORDER BY tb_slide.id DESC LIMIT 8";
         $sql = "SELECT ten_film,ten_film_english,tb_slide.id_film,ten_tap,link_slide 
                 FROM tb_slide,tb_film,tb_tap_film 
                 WHERE tb_film.id = tb_slide.id_film AND tb_film.id = tb_tap_film.id_film 
