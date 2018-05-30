@@ -2551,7 +2551,14 @@
 ::1 2018-05-31 00:13:17# /web-phim/?action=search&search_ten_film=than
 ::1 2018-05-31 00:13:20# /web-phim/?action=search&search_ten_film=than
 ::1 2018-05-31 00:16:42# /web-phim/
+<<<<<<< HEAD
+::1 2018-05-31 00:28:41# /web-phim/?action=search&search_ten_film=than
+::1 2018-05-31 00:29:29# /web-phim/?action=search&search_ten_film=than
+::1 2018-05-31 00:30:21# /web-phim/?action=search&search_ten_film=than
+::1 2018-05-31 00:30:39# /web-phim/?action=search&search_ten_film=than
+=======
 >>>>>>> 2b76482cee21c7fb9ccadc050daa39be6b3c4da8
+<<<<<<< HEAD
 ::1 2018-05-31 00:19:58# /web-phim/
 ::1 2018-05-31 00:22:16# /web-phim/
 ::1 2018-05-31 00:23:26# /web-phim/
@@ -2574,3 +2581,6 @@
 ::1 2018-05-31 00:50:03# /web-phim/
 ::1 2018-05-31 00:50:08# /web-phim/logout/
 ::1 2018-05-31 00:50:08# /web-phim/
+=======
+>>>>>>> 06d66f34c3a7bbd74cce3cf4bb6b1dee3d2d2ca6
+>>>>>>> ae469f23f1070eb9830a3ea8684a25f5b63f78f0

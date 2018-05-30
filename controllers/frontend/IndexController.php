@@ -580,8 +580,7 @@ class IndexController extends Controller
         // Tìm Start
         $start = ($this->view->current_page - 1) * $limit;
 
-        $this->view->search = $objModel->searchList($params,$limit,$start);
-        print_r($this->view->search);
+        $this->view->search = $objModel->searchList($params,$start,$limit);
     }
 
 
