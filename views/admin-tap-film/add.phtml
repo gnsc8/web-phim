@@ -11,15 +11,29 @@ if (@$_POST['submit'] == 'thêm mới')
   <table>
   <tr>
       <td>Tên Film:</td>
+<<<<<<< HEAD
       <td><select class="form-control select2" style="width: 100%;" name="txt_ten_film">
+=======
+      <td>
+>>>>>>> 1dd348cce2fbd88013bef6b756c950942226c4f0
         <?php
-         foreach ($this->view->film as $row ){
-                       echo "
+         if (isset($_GET['id'])){
+             echo "<input value='".$this->view->loadOne->ten_film."' readonly >";
+         }else{
+             echo '<select  name="txt_ten_film">';
+             foreach ($this->view->film as $row ){
+                 echo "
                    <option value='{$row['id']}'>{$row['ten_film']}</option>
                    ";
-                   }
+             }
+             echo '</select>';
+         }
                    ?>
+<<<<<<< HEAD
         </select>
+=======
+
+>>>>>>> 1dd348cce2fbd88013bef6b756c950942226c4f0
 
       </td>
     </tr>

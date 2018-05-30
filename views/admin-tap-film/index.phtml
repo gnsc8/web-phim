@@ -1,4 +1,4 @@
-
+<link rel="stylesheet" href="<?php echo public_path;?>/css/phan_trang.css">
 <section class="content-header">
       <div class="container-fluid">
         <div class="row mb-2">
@@ -19,6 +19,7 @@
             </div>
             <!-- /.card-header -->
             <div class="card-body">
+                <form action="">
               <table id="example2" class="table table-bordered table-hover">
                 <thead>
                          <tr>
@@ -35,7 +36,7 @@
                 </thead>
                 <tbody>
                    <?php
-                            foreach($this->view->list as $row){
+                            foreach($this->view->tap_film as $row){
 
                                 $link_edit = "<a href='?controller=admin-tap-film&action=edit&id={$row['id']}'>{$row['ten_film']}</a>";
                                 echo " <tr>
@@ -52,7 +53,63 @@
                 </tbody>
                 
               </table>
+                    <div class="pagination">
+                        <?php
+                        //hiển thị phần phân trang
+
+                        //phần kiểm tra tìm kiếm
+                        /*$base_url = base_url;
+                        $nam_phat_hanh="";
+                        $ten_film="";
+                        $quoc_gia="";
+                        if (isset($params['search_ten_film']) && strlen($params['search_ten_film']) > 0) {
+                            $ten_film = "&search_ten_film = ";
+                            $ten_film .= $params['search_ten_film'];
+                        }
+                        if (isset($params['search_quoc_gia']) && strlen($params['search_quoc_gia']) > 0) {
+                            $quoc_gia = "&search_nam_phat_hanh = ";
+                            $quoc_gia .= $params['search_quoc_gia'];
+                        }
+                        if (isset($params['search_nam_phat_hanh']) && strlen($params['search_nam_phat_hanh']) > 0) {
+                            $nam_phat_hanh = "&search_quoc_gia = ";
+                            $nam_phat_hanh .= $params['search_nam_phat_hanh'];
+                        }
+                        $url_admin_film = "?controller=admin-film$ten_film$nam_phat_hanh$quoc_gia";*/
+
+                        $url_admin_film = "?controller=admin-tap-film";
+
+                        $data = '';
+                        if ($this->view->current_page > 1 && $this->view->total_page > 1){
+                            $data .= '<a class="phan_trang" href="'.$url_admin_film.'&page='.($this->view->current_page-1).'">Prev</a>';
+                        }
+
+                        // Lặp khoảng giữa
+
+                        $data .=($this->view->current_page - 3) > 1 ? '<li class="phan_trang">...</li>' :'';
+                        for($i = ($this->view->current_page - 3) > 0 ? ($this->view->current_page - 3) : 1; $i <= (($this->view->current_page + 3) > $this->view->total_page ? $this->view->total_page :($this->view->current_page + 3)); $i++){
+                            if($i == $this->view->current_page){
+                                $data .= '<span class="phan_trang" style="background-color: white;color: black;border: 1px solid;">'.$i.'</span>';
+                            } else{
+                                $data .= '<a class="phan_trang" href="'.$url_admin_film.'&page='.$i.'">'.$i.'</a>';
+                            }
+                        }
+                        $data .=($this->view->current_page + 3) < $this->view->total_page ? '<li class="phan_trang">...</li>' :'';
+
+                        // nếu current_page < $this->view->total_page và total_page > 1 mới hiển thị nút prev
+                        if ($this->view->current_page < $this->view->total_page && $this->view->total_page > 1){
+                            $data .= '<a class="phan_trang" href="'.$url_admin_film.'&page='.($this->view->current_page+1).'">Next</a>';
+                        }
+                        echo $data;
+                        ?>
+                    </div>
+                    <style type="text/css">
+                        .phan_trang{
+                            display: inline;
+                        }
+                    </style>
+                </form>
             </div>
+
             <!-- /.card-body -->
           </div>
           <!-- /.card -->
@@ -61,5 +118,6 @@
       </div>
       <!-- /.row -->
     </section>
+
 
 

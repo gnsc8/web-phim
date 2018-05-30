@@ -8,26 +8,7 @@ class TapFilmModel extends MyModel{
     public $link_op;
     protected $tb_name = 'tb_tap_film';
     protected $tb_name_film ='tb_film';
-    public function getList($params = null){
 
-        $sql = "SELECT $this->tb_name.id,$this->tb_name_film.ten_film,$this->tb_name.ten_tap,$this->tb_name.link_fb,$this->tb_name.link_gd,$this->tb_name.link_op FROM $this->tb_name,$this->tb_name_film WHERE $this->tb_name.id_film = $this->tb_name_film.id ORDER BY $this->tb_name.id DESC ";
-
-        $res = $this->ExecQuery($sql); // hàm exec này được kế thừa từ lớp cha MyModel.
-
-        $data = array();
-
-        while($row = mysqli_fetch_assoc($res)){
-            $data[] = $row;
-        }
-        mysqli_free_result($res);
-
-        return $data;
-    }
-
-    /**
-     * Hàm xử lý thêm mới NSX
-     * @param null $params
-     */
     public function SaveNew($id){
 
         $sqlInsert = "INSERT INTO $this->tb_name(id_film,ten_tap,link_fb,link_gd,link_op)
@@ -45,7 +26,7 @@ class TapFilmModel extends MyModel{
     }
 
     public function loadOne($id){
-        $sql = "SELECT $this->tb_name.*,$this->tb_name_film.ten_film FROM $this->tb_name,$this->tb_name_film WHERE $this->tb_name.id_film = $this->tb_name_film.id AND $this->tb_name.id= $id";
+        $sql = "SELECT tb_tap_film.*,tb_film.ten_film FROM tb_tap_film,tb_film WHERE tb_tap_film.id_film = tb_film.id AND tb_film.id= $id";
         $objRes = new stdClass();
         $res = mysqli_query($this->getConn(), $sql);
         if(mysqli_errno($this->getConn()))
@@ -83,7 +64,7 @@ class TapFilmModel extends MyModel{
             return "Không cập nhật  được";
 
     }
-      public function getFilm(){
+    public function getFilm(){
         $sql = "SELECT * FROM $this->tb_name_film";
         $res = $this->ExecQuery($sql); // hàm exec này được kế thừa từ lớp cha MyModel.
 
@@ -95,5 +76,36 @@ class TapFilmModel extends MyModel{
         mysqli_free_result($res);
 
         return $data;
-}
+    }
+    public function countTapFilm(){
+        $sql = "SELECT COUNT(id) as tong FROM tb_tap_film";
+        $res = $this->ExecQuery($sql); // hàm exec này được kế thừa từ lớp cha MyModel.
+
+        $row = mysqli_fetch_assoc($res);
+            $data = $row['tong'];
+
+        mysqli_free_result($res);
+
+        return $data;
+    }
+    public function getlist($start,$limit){
+
+        $sql = "SELECT $this->tb_name.id,$this->tb_name_film.ten_film,$this->tb_name.ten_tap,$this->tb_name.link_fb,$this->tb_name.link_gd,$this->tb_name.link_op 
+FROM $this->tb_name,$this->tb_name_film 
+WHERE $this->tb_name.id_film = $this->tb_name_film.id 
+ORDER BY $this->tb_name.id DESC 
+LIMIT $start,$limit";
+
+        $res = $this->ExecQuery($sql); // hàm exec này được kế thừa từ lớp cha MyModel.
+
+        $data = array();
+
+        while($row = mysqli_fetch_assoc($res)){
+            $data[] = $row;
+        }
+
+        mysqli_free_result($res);
+
+        return $data;
+    }
 }
