@@ -1,4 +1,4 @@
-
+<link rel="stylesheet" href="<?php echo public_path;?>/css/phan_trang.css">
 <section class="content-header">
       <div class="container-fluid">
         <div class="row mb-2">
@@ -16,6 +16,12 @@
               <h3 class="card-title"><?php echo  $this->view->title; ?></h3>
               <a href="?controller=admin-dao-dien&action=add">Thêm mới</a>
             </div>
+              <form action="" method="get">
+                  <input type="hidden" name="controller" value ="admin-dao-dien">
+                  <input type="text" name="search_hoten" placeholder="Nhập Tên Đạo Diễn Cần Tìm">
+                  <input type="submit" value="search">
+                  <a href="?controller=admin-dao-dien">Clear</a>
+              </form>
             <!-- /.card-header -->
             <div class="card-body">
                 <form action="" method="post">
@@ -31,7 +37,7 @@
                 </thead>
                 <tbody>
                    <?php
-                            foreach($this->view->list as $row){
+                            foreach($this->view->dao_dien as $row){
 
                                 $link_edit = "<a href='?controller=admin-dao-dien&action=edit&id={$row['id']}'>{$row['ten_dao_dien']}</a>";
                                 echo " <tr>
@@ -45,6 +51,44 @@
                 </tbody>
                 
               </table>
+                    <div class="pagination">
+                        <?php
+                        //hiển thị phần phân trang
+                        $base_url = base_url;
+                        $ten_dao_dien="";
+                        if (isset($_GET['search_hoten']) && strlen($_GET['search_hoten']) > 0) {
+                            $ten_dao_dien = "&search_hoten=".$_GET['search_hoten'];
+                        }
+                        $url_admin = "?controller=admin-dao-dien$ten_dao_dien";
+                        $data = '';
+                        if ($this->view->current_page > 1 && $this->view->total_page > 1){
+                            $data .= '<a class="phan_trang" href="'.$base_url.''.$url_admin.'&page='.($this->view->current_page-1).'">Prev</a>';
+                        }
+
+                        // Lặp khoảng giữa
+
+                        $data .=($this->view->current_page - 3) > 1 ? '<li class="phan_trang">...</li>' :'';
+                        for($i = ($this->view->current_page - 3) > 0 ? ($this->view->current_page - 3) : 1; $i <= (($this->view->current_page + 3) > $this->view->total_page ? $this->view->total_page :($this->view->current_page + 3)); $i++){
+                            if($i == $this->view->current_page){
+                                $data .= '<span class="phan_trang" style="background-color: white;color: black;border: 1px solid;">'.$i.'</span>';
+                            } else{
+                                $data .= '<a class="phan_trang" href="'.$url_admin.'&page='.$i.'">'.$i.'</a>';
+                            }
+                        }
+                        $data .=($this->view->current_page + 3) < $this->view->total_page ? '<li class="phan_trang">...</li>' :'';
+
+                        // nếu current_page < $this->view->total_page và total_page > 1 mới hiển thị nút prev
+                        if ($this->view->current_page < $this->view->total_page && $this->view->total_page > 1){
+                            $data .= '<a class="phan_trang" href="'.$url_admin.'&page='.($this->view->current_page+1).'">Next</a>';
+                        }
+                        echo $data;
+                        ?>
+                    </div>
+                    <style type="text/css">
+                        .phan_trang{
+                            display: inline;
+                        }
+                    </style>
 
                 </form>
             </div>

@@ -155,17 +155,14 @@ $data=$this->view->list;
     $nam_phat_hanh="";
     $ten_film="";
     $quoc_gia="";
-    if (isset($params['search_ten_film']) && strlen($params['search_ten_film']) > 0) {
-            $ten_film = "&search_ten_film = ";
-            $ten_film .= $params['search_ten_film'];
+    if (isset($_GET['search_ten_film']) && strlen($_GET['search_ten_film']) > 0) {
+            $ten_film = "&search_ten_film=".$_GET['search_ten_film'];
         }
-    if (isset($params['search_quoc_gia']) && strlen($params['search_quoc_gia']) > 0) {
-            $quoc_gia = "&search_nam_phat_hanh = ";
-            $quoc_gia .= $params['search_quoc_gia'];
+    if (isset($_GET['search_quoc_gia']) && strlen($_GET['search_quoc_gia']) > 0) {
+            $quoc_gia = "&search_quoc_gia=".$_GET['search_quoc_gia'];
         }
-    if (isset($params['search_nam_phat_hanh']) && strlen($params['search_nam_phat_hanh']) > 0) {
-            $nam_phat_hanh = "&search_quoc_gia = ";
-            $nam_phat_hanh .= $params['search_nam_phat_hanh'];
+    if (isset($_GET['search_nam_phat_hanh']) && strlen($_GET['search_nam_phat_hanh']) > 0) {
+            $nam_phat_hanh = "&search_nam_phat_hanh=".$_GET['search_nam_phat_hanh'];
         }
     $url_admin_film = "?controller=admin-film$ten_film$nam_phat_hanh$quoc_gia";
     $data = '';
