@@ -59,6 +59,8 @@ class AdminChiTietTheLoaiController extends Controller
         $obModelCT = new ChiTietTheLoaiModel();
         
         $this->view->objCT =  $obModelCT->loadOne($id);
+        print_r($this->view->objCT);
+        $id_film = $this->view->objCT->id_film;
 
         //2. Xử lý ghi vào DB
 
@@ -70,14 +72,13 @@ class AdminChiTietTheLoaiController extends Controller
 
             //2.Nếu không có lỗi  Tạo model xử lý ghi vào CSDL
             $obModel = new ChiTietTheLoaiModel();
-            $obModel->id =$id;
-            $obModel->ten_film =$_POST['txt_ten_film'];
-            $obModel->ten_the_loai = $_POST['txt_ten_the_loai'];
+           
+            $id_tl=$_POST['txt_ten_the_loai'];
         
 
 
 
-            $res = $obModel->SaveUpdate();
+            $res = $obModel->SaveUpdate($id,$id_film,$id_tl);
             if (is_numeric($res)) {
                 $this->view->objCT=$obModel;
                 $this->view->msg = "Cập nhật thành công!";
