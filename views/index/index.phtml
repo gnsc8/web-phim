@@ -170,7 +170,7 @@ echo '<meta charset="utf-8">
                 $ten_film = ConvertKhongDau($row['ten_film']);
                 $ten_film_english = ConvertKhongDau($row['ten_film_english']);
                 echo "<a href='$phim/$ten_film-$ten_film_english-{$row['id_film']}.1/tap-{$row['ten_tap']}/'>
-                <img data-u='image' src='".public_path."/{$row['link_slide']}' />
+                <img data-u='image' src='{$row['link_slide']}' />
             </a>";
             }
 

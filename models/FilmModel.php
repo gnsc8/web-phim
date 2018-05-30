@@ -419,6 +419,11 @@ limit 8";
     }
     public function getSlide(){
         $sql = "SELECT ten_film,ten_film_english,tb_slide.id_film,ten_tap,link_slide FROM tb_slide,tb_film,tb_tap_film WHERE tb_film.id = tb_slide.id_film AND tb_film.id = tb_tap_film.id_film ORDER BY tb_slide.id DESC LIMIT 8";
+        $sql = "SELECT ten_film,ten_film_english,tb_slide.id_film,ten_tap,link_slide 
+                FROM tb_slide,tb_film,tb_tap_film 
+                WHERE tb_film.id = tb_slide.id_film AND tb_film.id = tb_tap_film.id_film 
+                ORDER BY tb_slide.id DESC LIMIT 8";
+        //$sql = "SELECT tb_slide.*,ten_film,ten_tap FROM tb_slide,tb_film,tb_tap_film WHERE tb_film.id = tb_slide.id_film AND tb_film.id = tb_tap_film.id_film ORDER BY tb_slide.id DESC LIMIT 8";
         $res = $this->ExecQuery($sql); // hàm exec này được kế thừa từ lớp cha MyModel.
 
         $data = array();
@@ -427,7 +432,7 @@ limit 8";
             $data[] = $row;
         }
         mysqli_free_result($res);
-
+        print_r($data);
         return $data;
     }
 }
