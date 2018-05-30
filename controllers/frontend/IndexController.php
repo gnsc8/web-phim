@@ -552,4 +552,20 @@ class IndexController extends Controller
         session_unset();// hủy hết session
         header('Location: '.base_url); // chuyển về trang chủ
     }
-}
+    public function searchAction(){
+
+         $params = array();
+        if(isset($_GET['search_ten_film'])){
+            //1. kiểm tra hợp lệ của chuỗi search_username Việc này tự làm
+
+            //2. nếu kiểm tra ok thì gán vào mảng
+            $params['search_ten_film'] = $_GET['search_ten_film'];
+        }
+
+        $objModel = new SearchFilmModel();
+        $this->view->search = $objModel->searchList($params);
+
+    }
+
+
+    }
