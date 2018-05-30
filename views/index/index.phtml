@@ -1,7 +1,84 @@
-<meta charset="utf-8">
+<?php
+$link_public = public_path;
+$phim = thong_tin_phim_path;
+$base_url = base_url;
+if(isset($_GET['search_ten_film']) && strlen($_GET['search_ten_film']) > 0){
+   echo '<link rel="stylesheet" href="'.$link_public.'/css/phan_trang.css">
+<section class="movie">
+    <div class="container">
+        <div class="wrap-item">';
+            echo "<div class='title-section'>
+          <span>
+          <a href='' class='see-more'>";
+              //$my_title = (string)$this->view->ten_quoc_gia;
+          if (isset($_GET['search_ten_film'])) {
+              echo "Từ khóa :".$_GET['search_ten_film'];
+          }
+          echo "     </a>
+</span>
+</div>
+<div class='mv-group'>";
+
+
+    foreach ($this->view->search as $row){
+        $ten_film = ConvertKhongDau($row['ten_film']);
+        $ten_film_english = ConvertKhongDau($row['ten_film_english']);
+        echo "<div class='mv-item'>
+                <div class='mv-item-iner'>
+                    <a href='$phim/$ten_film-$ten_film_english-{$row['id_film']}.1/tap-{$row['ten_tap']}/' class='img-item'>
+                        <div class='mv-item-img' alt='{$row['ten_film']}' title='{$row['ten_film']} - {$row['ten_film_english']}' style='background: url({$row['link_anh']}) no-repeat scroll center top / cover;'>
+                        </div>
+                        <i class='btn-play'>
+                            <img src='$base_url/publics/images/btn-play.png' alt='hgfilm - {$row['ten_film']} - {$row['ten_film_english']}' width='50'>
+                        </i>
+                    </a>
+                    <span class='label'>Tập {$row['ten_tap']}</span>
+                </div>
+                <div class='mv-item-info'>
+                    <a href='$phim/$ten_film-$ten_film_english-{$row['id_film']}.1/tap-{$row['ten_tap']}/' class='mv-title'>
+                    {$row['ten_film']}
+                    </a>
+                </div>
+            </div>";}
+
+
+echo '</div>
+</div>
+</div>
+</section>
+<div class="pagination">';
+
+    //hiển thị phần phân trang
+    // nếu current_page > 1 và total_page > 1 mới hiển thị nút prev
+    $data = '';
+    if ($this->view->current_page > 1 && $this->view->total_page > 1){
+        $data .= '<a class="phan_trang" href="'.$base_url.'/phim-bo/page-'.($this->view->current_page-1).'/">Prev</a>';
+    }
+
+    // Lặp khoảng giữa
+
+    $data .=($this->view->current_page - 2) > 1 ? '<li class="phan_trang">...</li>' :'';
+    for($i = ($this->view->current_page - 2) > 0 ? ($this->view->current_page - 2) : 1; $i <= (($this->view->current_page + 2) > $this->view->total_page ? $this->view->total_page :($this->view->current_page + 2)); $i++){
+        if($i == $this->view->current_page){
+            $data .= '<span class="phan_trang" style="background-color: white;color: black">'.$i.'</span>';
+        } else{
+            $data .= '<a class="phan_trang" href="'.$base_url.'/phim-bo/page-'.$i.'/">'.$i.'</a>';
+        }
+    }
+    $data .=($this->view->current_page + 2) < $this->view->total_page ? '<li class="phan_trang">...</li>' :'';
+
+    // nếu current_page < $this->view->total_page và total_page > 1 mới hiển thị nút prev
+    if ($this->view->current_page < $this->view->total_page && $this->view->total_page > 1){
+        $data .= '<a class="phan_trang" href="'.$base_url.'/phim-bo/page-'.($this->view->current_page+1).'/">Next</a>';
+    }
+    echo $data."</div>";
+
+
+}else{
+echo '<meta charset="utf-8">
 <!-- slider -->
-<script type="text/javascript" src="<?php echo public_path;?>/js/jquery-1.9.1.min.js"></script>
-<script type="text/javascript" src="<?php echo public_path;?>/js/jssor.slider.min.js"></script>
+<script type="text/javascript" src="'.$link_public.'/js/jquery-1.9.1.min.js"></script>
+<script type="text/javascript" src="'.$link_public.'/js/jssor.slider.min.js"></script>
 <script type="text/javascript">
     jQuery(document).ready(function ($) {
 
@@ -85,11 +162,10 @@
         <!--<div data-u="loading" class="jssorl-009-spin" style="position:absolute;top:0px;left:0px;width:100%;height:100%;text-align:center;background-color:rgba(0,0,0,0.7);">
             <img style="margin-top:-19px;position:relative;top:50%;width:38px;height:38px;" src="../svg/loading/static-svg/spin.svg" />
         </div>-->
-        <div data-u="slides" style="cursor:default;position:relative;top:0px;left:0px;width:1300px;height:500px;overflow:hidden;">
+        <div data-u="slides" style="cursor:default;position:relative;top:0px;left:0px;width:1300px;height:500px;overflow:hidden;">';
             
-            <?php
-            $link_public = public_path;
-            $phim = thong_tin_phim_path;
+
+
             foreach ($this->view->slide as $row){
                 $ten_film = ConvertKhongDau($row['ten_film']);
                 $ten_film_english = ConvertKhongDau($row['ten_film_english']);
@@ -97,8 +173,8 @@
                 <img data-u='image' src='".public_path."/{$row['link_slide']}' />
             </a>";
             }
-            ?>
-        </div>
+
+     echo '   </div>
         <!-- Bullet Navigator -->
         <div data-u="navigator" class="jssorb032" style="position:absolute;bottom:12px;right:12px;" data-autocenter="1" data-scale="0.5" data-scale-bottom="0.75">
             <div data-u="prototype" class="i" style="width:16px;height:16px;">
@@ -124,18 +200,14 @@
 <main>
   <section class="movie">
         <div class="container">
-            <div class="wrap-item">
-                <div class='title-section'>
+            <div class="wrap-item">';
+     echo "           <div class='title-section'>
           <span>
-          <a href='<?php echo base_url;?>/phim-bo/' class='see-more'>Phim Bộ mới nhất</a>
+          <a href='$base_url/phim-bo/' class='see-more'>Phim Bộ mới nhất</a>
           </span>
-                    <a href='<?php echo base_url;?>/phim-bo/' class='read-more'>xem Thêm >></a>
+                    <a href='$base_url/phim-bo/' class='read-more'>xem Thêm >></a>
                 </div>
-                <div class='mv-group'>
-                    <?php
-                    $link_public = public_path;
-                    $phim = thong_tin_phim_path;
-                    $base_url = base_url;
+                <div class='mv-group'>";
                     foreach ($this->view->phim_bo as $row){
                         $ten_film = ConvertKhongDau($row['ten_film']);
                     $ten_film_english = ConvertKhongDau($row['ten_film_english']);
@@ -156,24 +228,22 @@
                     </a>
                 </div>
             </div>";}
-                    ?>
-                </div>
+
+         echo '</div>
             </div>
         </div>
     </section>
     <section class="movie">
         <div class="container">
-            <div class="wrap-item">
-                <div class='title-section'>
+            <div class="wrap-item">';
+       echo" <div class='title-section'>
           <span>
-          <a href='<?php echo base_url;?>/phim-le/' class='see-more'>Phim lẻ mới nhất</a>
+          <a href='$base_url/phim-le/' class='see-more'>Phim lẻ mới nhất</a>
           </span>
-                    <a href='<?php echo base_url;?>/phim-le/' class='read-more'>xem Thêm >></a>
+                    <a href='$base_url/phim-le/' class='read-more'>xem Thêm >></a>
                 </div>
-                <div class='mv-group'>
-                    <?php
-                    $link_public = public_path;
-                    $phim = thong_tin_phim_path;
+                <div class='mv-group'>";
+
                     foreach ($this->view->phim_le as $row){
                         $ten_film = ConvertKhongDau($row['ten_film']);
                     $ten_film_english = ConvertKhongDau($row['ten_film_english']);
@@ -194,24 +264,21 @@
                     </a>
                 </div>
             </div>";}
-                    ?>
-                </div>
+
+           echo'     </div>
             </div>
         </div>
     </section>
     <section class="movie">
         <div class="container">
-            <div class="wrap-item">
-                <div class='title-section'>
+            <div class="wrap-item">';
+                echo "<div class='title-section'>
           <span>
-          <a href='<?php echo base_url;?>/phim-le/' class='see-more'>Phim chiếu rạp mới nhất</a>
+          <a href='$base_url/phim-le/' class='see-more'>Phim chiếu rạp mới nhất</a>
           </span>
-                    <a href='<?php echo base_url;?>/phim-le/' class='read-more'>xem Thêm >></a>
+                    <a href='$base_url/phim-le/' class='read-more'>xem Thêm >></a>
                 </div>
-                <div class='mv-group'>
-                    <?php
-                    $link_public = public_path;
-                    $phim = thong_tin_phim_path;
+                <div class='mv-group'>";
                     foreach ($this->view->phim_chieu_rap as $row){
                         $ten_film = ConvertKhongDau($row['ten_film']);
                     $ten_film_english = ConvertKhongDau($row['ten_film_english']);
@@ -232,24 +299,21 @@
                     </a>
                 </div>
             </div>";}
-                    ?>
-                </div>
+
+        echo'</div>
             </div>
         </div>
     </section>
     <section class="movie">
         <div class="container">
-            <div class="wrap-item">
-                <div class='title-section'>
+            <div class="wrap-item">';
+           echo "<div class='title-section'>
           <span>
-          <a href='<?php echo base_url;?>/hoat-hinh-anime/' class='see-more'>Hoạt hình mới nhất</a>
+          <a href='$base_url/hoat-hinh-anime/' class='see-more'>Hoạt hình mới nhất</a>
           </span>
-                    <a href='<?php echo base_url;?>/hoat-hinh-anime/' class='read-more'>xem Thêm >></a>
+                    <a href='$base_url/hoat-hinh-anime/' class='read-more'>xem Thêm >></a>
                 </div>
-                <div class='mv-group'>
-                    <?php
-                    $link_public = public_path;
-                    $phim = thong_tin_phim_path;
+                <div class='mv-group'>";
                     foreach ($this->view->phim_anime as $row){
                         $ten_film = ConvertKhongDau($row['ten_film']);
                     $ten_film_english = ConvertKhongDau($row['ten_film_english']);
@@ -270,10 +334,11 @@
                     </a>
                 </div>
             </div>";}
-                    ?>
-                </div>
+
+         echo"</div>
             </div>
         </div>
     </section>
-</main>
+</main>";
 
+}

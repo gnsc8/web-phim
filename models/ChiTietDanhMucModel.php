@@ -15,14 +15,27 @@ class ChiTietDanhMucModel extends MyModel
     public $tb_name_film="tb_film";
     public $tb_name_danh_muc="tb_danh_muc";
 
-    public function getList($params = null){
+    public function getList($params = null,$start,$limit){
 
-        $sql = "SELECT tb_chi_tiet_danh_muc.*,tb_film.ten_film,tb_danh_muc.ten_danh_muc 
-FROM tb_chi_tiet_danh_muc 
-inner join tb_film on tb_chi_tiet_danh_muc.id_film=tb_film.id 
-inner join tb_danh_muc on tb_chi_tiet_danh_muc.id_danh_muc=tb_danh_muc.id 
-ORDER  BY tb_chi_tiet_danh_muc.id DESC";
+        $sql = "SELECT tb_chi_tiet_danh_muc.*,tb_film.ten_film,tb_danh_muc.ten_danh_muc
+                FROM tb_chi_tiet_danh_muc
+                inner join tb_film on tb_chi_tiet_danh_muc.id_film=tb_film.id 
+                inner join tb_danh_muc on tb_chi_tiet_danh_muc.id_danh_muc=tb_danh_muc.id  
+                ";
 
+        // lệnh sql chưa có where
+        $strWhere = '';
+        if(isset($params['search']) && strlen($params['search'])>0){
+            if($strWhere =='')
+                $strWhere .= " WHERE ten_film LIKE '%{$params['search']}%' ";
+            else
+                $strWhere .= " AND  ten_film LIKE '%{$params['search']}%' ";
+        }
+
+        $strLimit = " LIMIT $start, $limit";
+        $sql .= $strWhere;
+        $sql .= "ORDER  BY $this->tb_name.id DESC";
+        $sql .= $strLimit;
         $res = $this->ExecQuery($sql); // hàm exec này được kế thừa từ lớp cha MyModel.
 
         $data = array();
@@ -30,6 +43,30 @@ ORDER  BY tb_chi_tiet_danh_muc.id DESC";
         while($row = mysqli_fetch_assoc($res)){
             $data[] = $row;
         }
+        mysqli_free_result($res);
+
+        return $data;
+    }
+    public function count($params = null){
+        $sql = "SELECT COUNT(tb_chi_tiet_danh_muc.id) as tong
+                FROM tb_chi_tiet_danh_muc
+                inner join tb_film on tb_chi_tiet_danh_muc.id_film=tb_film.id 
+                inner join tb_danh_muc on tb_chi_tiet_danh_muc.id_danh_muc=tb_danh_muc.id ";
+
+        $strWhere = '';
+        if (isset($params['search']) && strlen($params['search']) > 0) {
+            if ($strWhere == '')
+                $strWhere .= " WHERE ten_film LIKE '%{$params['search']}%' ";
+            else
+                $strWhere .= " AND  ten_film LIKE '%{$params['search']}%' ";
+        }
+
+        $sql .= $strWhere;
+        $res = $this->ExecQuery($sql); // hàm exec này được kế thừa từ lớp cha MyModel.
+
+        $row = mysqli_fetch_assoc($res);
+
+        $data = $row['tong'];
         mysqli_free_result($res);
 
         return $data;

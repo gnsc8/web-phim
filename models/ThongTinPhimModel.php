@@ -76,12 +76,12 @@ class ThongTinPhimModel extends MyModel
         return $data;
     }
     public function loadRelated($id){
-        $sql = "select * from tb_tap_film
+        $sql = "select tb_tap_film.id,tb_tap_film.id_film,tb_tap_film.link_gd,ten_film,ten_film_english,link_anh,tb_tap_film.ten_tap from tb_tap_film
 INNER JOIN tb_film as tb3 ON tb_tap_film.id_film = tb3.id
-WHERE tb_tap_film.id IN (select max(tb2.id) from tb_tap_film as tb2 GROUP BY tb2.id_film) 
-AND tb_tap_film.id_film IN (select DISTINCT id_film from tb_chi_tiet_danh_muc as tb3  WHERE id_danh_muc = $id)  
+WHERE tb_tap_film.id IN (select max(tb2.id) from tb_tap_film as tb2 GROUP BY tb2.id_film)
+AND tb_tap_film.id_film IN (select DISTINCT id_film from tb_chi_tiet_danh_muc as tb3  WHERE id_danh_muc = $id)
 ORDER BY tb_tap_film.id desc
-limit 8";
+limit 6";
 
         $res = $this->ExecQuery($sql); // hàm exec này được kế thừa từ lớp cha MyModel.
 
