@@ -32,7 +32,7 @@ class AdminController extends Controller{
                 // ghi vào session
                 $_SESSION['auth'] = $checkLogin; // bỏ đối tượng này vào biến session
                 // chuyển tran về trang chủ
-                header('Location: ?controller=admin');
+                header('Location: '.base_url.'/?controller=admin');
 
             }else{
                 $this->view->msg = $checkLogin;

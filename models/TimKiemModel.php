@@ -13,7 +13,7 @@ class TimKiemModel extends MyModel{
     }
     public function getTheLoai($start,$limit,$id){
 
-            $sql = "select * from tb_tap_film
+            $sql = "select tb_tap_film.id,tb_tap_film.id_film,tb_tap_film.link_gd,ten_film,ten_film_english,link_anh,ten_tap from tb_tap_film
 INNER JOIN tb_film as tb3 ON tb_tap_film.id_film = tb3.id
 WHERE tb_tap_film.id IN (select max(tb2.id) from tb_tap_film as tb2 GROUP BY tb2.id_film) 
 AND tb_tap_film.id_film IN (select DISTINCT id_film from tb_chi_tiet_the_loai as tb3  WHERE id_the_loai = $id)  
@@ -56,7 +56,7 @@ limit $start,$limit";
     }
     public function getQuocGia($start,$limit,$id){
 
-        $sql = "select * from tb_tap_film
+        $sql = "select tb_tap_film.id,tb_tap_film.id_film,tb_tap_film.link_gd,ten_film,ten_film_english,link_anh,ten_tap from tb_tap_film
 INNER JOIN tb_film as tb3 ON tb_tap_film.id_film = tb3.id
 WHERE tb_tap_film.id IN (select max(tb2.id) from tb_tap_film as tb2 GROUP BY tb2.id_film) 
 AND tb3.id_quoc_gia = $id
@@ -99,7 +99,7 @@ limit $start,$limit";
     }
     public function getListMyFilm($id_user,$limit,$start){
 
-        $sql = "select * from tb_tap_film
+        $sql = "select tb_tap_film.id,tb_tap_film.id_film,tb_tap_film.link_gd,ten_film,ten_film_english,link_anh,ten_tap from tb_tap_film
 INNER JOIN tb_film as tb3 ON tb_tap_film.id_film = tb3.id
 WHERE tb_tap_film.id IN (select max(tb2.id) from tb_tap_film as tb2 GROUP BY tb2.id_film)
 AND tb_tap_film.id_film IN (select DISTINCT id_film from tb_ua_thich as tb3  WHERE id_nguoi_dung = $id_user)
@@ -149,7 +149,7 @@ limit $start,$limit";
     }
     public function getListPhimBo( $limit,$start){
 
-        $sql = "select * from tb_tap_film
+        $sql = "select tb_tap_film.id,tb_tap_film.id_film,tb_tap_film.link_gd,ten_film,ten_film_english,link_anh,ten_tap from tb_tap_film
 INNER JOIN tb_film as tb3 ON tb_tap_film.id_film = tb3.id
 WHERE tb_tap_film.id IN (select max(tb2.id) from tb_tap_film as tb2 GROUP BY tb2.id_film)
 AND tb_tap_film.id_film IN (select DISTINCT id_film from tb_chi_tiet_danh_muc as tb3  WHERE id_danh_muc = 1)
@@ -179,7 +179,7 @@ limit $start,$limit";
     }
     public function getListPhimLe( $limit,$start){
 
-        $sql = "select * from tb_tap_film
+        $sql = "select tb_tap_film.id,tb_tap_film.id_film,tb_tap_film.link_gd,ten_film,ten_film_english,link_anh,ten_tap from tb_tap_film
 INNER JOIN tb_film as tb3 ON tb_tap_film.id_film = tb3.id
 WHERE tb_tap_film.id IN (select max(tb2.id) from tb_tap_film as tb2 GROUP BY tb2.id_film)
 AND tb_tap_film.id_film IN (select DISTINCT id_film from tb_chi_tiet_danh_muc as tb3  WHERE id_danh_muc = 2)
@@ -209,7 +209,7 @@ limit $start,$limit";
     }
     public function getListPhimAnime( $limit,$start){
 
-        $sql = "select * from tb_tap_film
+        $sql = "select tb_tap_film.id,tb_tap_film.id_film,tb_tap_film.link_gd,ten_film,ten_film_english,link_anh,ten_tap from tb_tap_film
 INNER JOIN tb_film as tb3 ON tb_tap_film.id_film = tb3.id
 WHERE tb_tap_film.id IN (select max(tb2.id) from tb_tap_film as tb2 GROUP BY tb2.id_film)
 AND tb_tap_film.id_film IN (select DISTINCT id_film from tb_chi_tiet_danh_muc as tb3  WHERE id_danh_muc = 4)

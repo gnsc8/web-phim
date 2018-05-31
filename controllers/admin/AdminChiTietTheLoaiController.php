@@ -10,15 +10,46 @@ class AdminChiTietTheLoaiController extends Controller
 {
 
     public function indexAction(){
-// action này in ra danh sách nhà sản xuất
+        // action này in ra danh sách nhà sản xuất
         $this->layout->tieu_de = "Danh sách chi tiết";
         $this->layout->meta_des ="Trang quản trị| danh sách ";
         $this->view->title = "Danh Sách Chi Tiết";
         // admin-chuc-nang
         // LOAD MODEL
 
+
+
+        $params = array();
+        if(isset($_GET['search'])){
+
+            $params['search'] = $_GET['search'];
+        }
+
         $objModel = new ChiTietTheLoaiModel();
-        $this->view->list = $objModel->getList();
+
+        //phân trang
+        $this->view->total_records = $objModel->count($params);
+
+        //tìm limit và current_page
+        $this->view->current_page = isset($_GET['page']) ? $_GET['page'] : 1;
+        //số bản ghi trên 1 trang
+        $limit = 10;
+
+        // tổng số trang
+        $this->view->total_page = ceil($this->view->total_records / $limit);
+
+        // Giới hạn current_page trong khoảng 1 đến total_page
+        if ($this->view->current_page > $this->view->total_page){
+            $this->view->current_page = $this->view->total_page;
+        }
+        else if ($this->view->current_page < 1){
+            $this->view->current_page = 1;
+        }
+
+        // Tìm Start
+        $start = ($this->view->current_page - 1) * $limit;
+
+        $this->view->list = $objModel->getlist($params,$start,$limit);
 
     }
 
