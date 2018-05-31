@@ -8,7 +8,6 @@ class UserModel extends MyModel
     public $dia_chi;
     public $dien_thoai;
     public $email;
-    public $ngay_sinh;
     public $gioi_tinh;
     public $nhom_tai_khoan;
     protected $tb_name = 'tb_user';
