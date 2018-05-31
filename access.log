@@ -2585,3 +2585,13 @@
 >>>>>>> 06d66f34c3a7bbd74cce3cf4bb6b1dee3d2d2ca6
 >>>>>>> ae469f23f1070eb9830a3ea8684a25f5b63f78f0
 ::1 2018-05-31 01:09:02# /web-phim/?search_ten_film=th%E1%BA%A7n
+::1 2018-05-31 01:11:19# /web-phim/?search_ten_film=th%E1%BA%A7n
+::1 2018-05-31 01:13:18# /web-phim/
+::1 2018-05-31 01:13:32# /web-phim/?search_ten_film=th%E1%BA%A7n
+::1 2018-05-31 01:15:32# /web-phim/register/
+::1 2018-05-31 01:17:30# /web-phim/
+::1 2018-05-31 01:17:35# /web-phim/?controller=admin&action=login
+::1 2018-05-31 01:18:38# /web-phim/?controller=admin&action=login
+::1 2018-05-31 01:18:39# /web-phim/
+::1 2018-05-31 01:18:53# /web-phim/?controller=admin&action=login
+::1 2018-05-31 01:18:54# /web-phim/?controller=admin
