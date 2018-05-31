@@ -4,7 +4,7 @@ class IndexController extends Controller
 
     public function indexAction()
     {   $objModel = new FilmModel();
-        $this->layout->tieu_de = "xem phim";
+        $this->layout->title = "Xem Phim Online";
         $this->layout->meta_des = "xem phim online";
         $this->view->title = "index";
         $this->view->the_loai_header = $objModel->getTheLoai();
@@ -85,6 +85,7 @@ class IndexController extends Controller
 
     public function thongtinphimAction()
     {
+        $this->layout->title = "Thông Tin Phim";
         /*if (strtoupper($_GET['id']) == 'full'){
             $id = 1;
         }elseif (is_numeric($_GET['id'])){
@@ -135,6 +136,7 @@ class IndexController extends Controller
 
     public function videoAction()
     {
+        $this->layout->title = "Xem Phim";
         if (!isset($_GET['id'])) die("Khong xac dinh ID");
         $id = intval($_GET['id']);
         if (!isset($_GET['tap'])) die("Khong xac dinh Tap");
@@ -175,6 +177,7 @@ class IndexController extends Controller
 
     public function registerAction()
     {
+        $this->layout->title = "Đăng ký người dùng";
         $objModel = new FilmModel();
         $this->view->the_loai_header = $objModel->getTheLoai();
         $this->view->quoc_gia_header = $objModel->getQuocGia();
@@ -240,6 +243,7 @@ class IndexController extends Controller
     //if (isset($_POST['']))
 }
     public function quocgiaAction(){
+        $this->layout->title = "Danh sách danh mục quốc gia";
         if(!isset($_GET['id'])) die("Khong xac dinh ID");
         $id = intval($_GET['id']);
 
@@ -296,6 +300,7 @@ class IndexController extends Controller
         $this->view->ten_quoc_gia = $objModelQG->getTenQuocGia($id);
     }
     public function theloaiAction(){
+        $this->layout->title = "Danh sách danh mục thể loại";
         if(!isset($_GET['id'])) die("Khong xac dinh ID");
         $id = intval($_GET['id']);
 
@@ -353,6 +358,7 @@ class IndexController extends Controller
         $this->view->ten_the_loai = $objModelTL->getTenTheLoai($id);
     }
     public function myfilmAction(){
+        $this->layout->title = "Danh sách danh mục phim ưa thích";
         //menu
         $objModel = new FilmModel();
         $this->view->the_loai_header = $objModel->getTheLoai();
@@ -427,6 +433,7 @@ class IndexController extends Controller
     }
     public function phimboAction(){
 
+        $this->layout->title = "Danh sách danh mục phim bộ";
         $objModel = new FilmModel();
         $this->view->the_loai_header = $objModel->getTheLoai();
         $this->view->quoc_gia_header = $objModel->getQuocGia();
@@ -479,7 +486,7 @@ class IndexController extends Controller
         $this->view->phim_bo = $objModelPB->getListPhimBo($limit,$start);
     }
     public function phimleAction(){
-
+        $this->layout->title = "Danh sách danh mục phiim lẻ";
         $objModel = new FilmModel();
         $this->view->the_loai_header = $objModel->getTheLoai();
         $this->view->quoc_gia_header = $objModel->getQuocGia();
@@ -532,7 +539,7 @@ class IndexController extends Controller
         $this->view->phim_le = $objModelPL->getListPhimLe($limit,$start);
     }
     public function hoathinhanimeAction(){
-
+        $this->layout->title = "Danh sách danh mục hoạt hình anime";
         $objModel = new FilmModel();
         $this->view->the_loai_header = $objModel->getTheLoai();
         $this->view->quoc_gia_header = $objModel->getQuocGia();
@@ -588,63 +595,7 @@ class IndexController extends Controller
         session_unset();// hủy hết session
         header('Location: '.base_url); // chuyển về trang chủ
     }
-    public function searchAction(){
-        $objModel = new FilmModel();
-        $this->view->the_loai_header = $objModel->getTheLoai();
-        $this->view->quoc_gia_header = $objModel->getQuocGia();
-        if(isset($_POST['submit-login'])){
-            // xử lý sự kiện đăng nhập
-            $username = $_POST['username-login'];
-            $password = $_POST['password-login'];
 
-            //1. Kiểm tra hợp lệ của dữ liệu: Tự làm
-
-            //2. Kiểm tồn tại trong DB: Gọi model ra kiểm tra
-            $objTaiKhoan = new NguoiDungModel();
-            $objTaiKhoan->username = $username;
-            $objTaiKhoan->passwd = md5($password);
-
-            $checkLogin = $objTaiKhoan->checkLogin();
-            if(is_a($checkLogin,'stdClass')){
-                // nếu kết quả của hàm là 1 đối tượng kiểu stdClass ==> là đăng nhập thành công.
-                // ghi vào session
-                $_SESSION['auth'] = $checkLogin; // bỏ đối tượng này vào biến session
-                // chuyển tran về trang chủ
-                //header('Location:'.base_url);
-
-            }else{
-                $this->view->msg = $checkLogin;
-            }
-        }
-
-         $params = array();
-        if(isset($_GET['search_ten_film'])){
-            $params['search_ten_film'] = $_GET['search_ten_film'];
-        }
-
-        $objModel = new SearchFilmModel();
-        $this->view->total_records = $objModel->count($params);
-        //tìm limit và current_page
-        $this->view->current_page = isset($_GET['page']) ? $_GET['page'] : 1;
-        //số bản ghi trên 1 trang
-        $limit = 32;
-
-        // tổng số trang
-        $this->view->total_page = ceil($this->view->total_records / $limit);
-
-        // Giới hạn current_page trong khoảng 1 đến total_page
-        if ($this->view->current_page > $this->view->total_page){
-            $this->view->current_page = $this->view->total_page;
-        }
-        else if ($this->view->current_page < 1){
-            $this->view->current_page = 1;
-        }
-
-        // Tìm Start
-        $start = ($this->view->current_page - 1) * $limit;
-
-        $this->view->search = $objModel->searchList($params,$start,$limit);
-    }
 
 
     }

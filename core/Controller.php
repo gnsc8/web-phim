@@ -9,6 +9,7 @@ class Controller {
     {
         $this->view = new stdClass();
         $this->layout = new stdClass();
+        $film="";
     }
 
     public function showContent(){
