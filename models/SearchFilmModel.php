@@ -11,7 +11,7 @@ INNER JOIN tb_film as tb3 ON tb_tap_film.id_film = tb3.id
 WHERE tb_tap_film.id IN (select max(tb2.id) from tb_tap_film as tb2 GROUP BY tb2.id_film) 
 ";
 
-         // lệnh sql chưa có where
+        // lệnh sql chưa có where
         $strWhere = '';
         if(isset($params['search_ten_film']) && strlen($params['search_ten_film'])>0){
             if($strWhere =='')
